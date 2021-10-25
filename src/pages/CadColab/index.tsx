@@ -1,5 +1,5 @@
-import React, { useCallback, useRef } from 'react';
-import {FiType, FiX} from 'react-icons/fi';
+import React, { useCallback, useRef, ChangeEvent } from 'react';
+import {FiType, FiX, FiLock, FiCamera} from 'react-icons/fi';
 import {TiSortNumerically} from 'react-icons/ti';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -14,14 +14,16 @@ import Button from '../../components/Button';
 
 import { useToast } from '../../hooks/toast';
 import { useAuth } from '../../hooks/auth';
-import { Container, Content, AnimationContainer} from './styles';
+import { Container, Content, AnimationContainer, AvatarInput} from './styles';
 
+import avatarMaria from 'D:/ProjetoF/projeto-web/src/assets/duda.png';
 import logoImg from '../../assets/logo444.png';
 import Menu from '../../components/menu/Navbar';
 
 interface CadColabFormData {
   nome: string;
   email: string;
+  password: string;
   phone: string;
   procedure: string;
 }
@@ -38,9 +40,10 @@ const CadColab: React.FC = () => {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          nome: Yup.string().required('CNPJ é obrigatório'),
-          email: Yup.string().required('Nome Fantasia é obrigatório'),
-          phone: Yup.string().required('Razão Social é obrigatório'),
+          nome: Yup.string().required('Nome é obrigatório'),
+          email: Yup.string().required('E-mail é obrigatório'),
+          password: Yup.string().min(6, 'No mínimo 6 dígitos'),
+          phone: Yup.string().required('Telefone é obrigatório'),
           procedure: Yup.string(),
         });
 
@@ -73,6 +76,26 @@ const CadColab: React.FC = () => {
     [addToast, history],
   );
 
+  const handleAvatarChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      if (e.target.files) {
+        const data = new FormData();
+
+        data.append('avatar', e.target.files[0]);
+
+        api.patch('/cooperator/avatar', data).then(response => {
+          //updateUser(response.data);
+
+          addToast({
+            type: 'success',
+            title: 'Avatar atualizado',
+          });
+        });
+      }
+    },
+    [addToast],
+  );
+
   return (
     <Container>
       <Menu/>
@@ -85,8 +108,21 @@ const CadColab: React.FC = () => {
 
             <Input name="nome" icon={FiType} placeholder="Nome Completo" />
             <Input name="email" icon={FiType} placeholder="E-Mail" />
+            <Input
+              name="password"
+              icon={FiLock}
+              type="password"
+              placeholder="Senha"
+            />
             <Input name="phone" icon={TiSortNumerically} placeholder="Telefone" />
             <Input name="procedure" icon={FiType} placeholder="Procedimento principal" />
+
+            <AvatarInput>
+            <label htmlFor="avatar">
+              <FiCamera size={20} />
+              <input type="file" id="avatar" onChange={handleAvatarChange} />
+            </label>
+            </AvatarInput>
 
             <Button type="submit">Salvar</Button>
           </Form>

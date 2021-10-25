@@ -158,7 +158,7 @@ export const Section = styled.section`
 
   > strong {
     color: #999591;
-    font-size: 20px;
+    font-size: 30px;
     line-height: 26px;
     border-bottom: 1px solid #3e3b47;
     display: block;

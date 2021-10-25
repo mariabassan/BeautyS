@@ -80,4 +80,47 @@ export const AnimationContainer = styled.div`
     }
   }
 `;
+
+export const AvatarInput = styled.div`
+  position: relative;
+
+  margin-bottom: 32px;
+  align-self: center;
+
+  img {
+    width: 186px;
+    height: 186px;
+    border-radius: 20%;
+  }
+
+  label {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    background: #ff9000;
+    border: none;
+    border-radius: 50%;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: background-color 0.3s;
+    cursor: pointer;
+
+    input {
+      display: none;
+    }
+
+    &:hover {
+      background: ${shade(0.2, '#ff9000')};
+    }
+
+    svg {
+      color: #312e38;
+    }
+  }
+`;
 //ffc183

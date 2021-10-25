@@ -40,7 +40,7 @@ const Colaboradores: React.FC = () => {
     },[])
 
 return (
-    <S.Container>
+    /*<S.Container>
       <Menu />
       <S.Section>
         <Content>
@@ -64,7 +64,28 @@ return (
           </CardDeck>
         </Content>
       </S.Section>
-    </S.Container>
+    </S.Container>*/
+
+    <S.Section>
+      <strong>Colaboradores</strong>
+      {cooperator.map((coop) => (
+      <S.Appointment key={coop._id}>
+        <div>
+          <img
+            src={coop.avatar || avatarUser}
+          />
+
+          <strong>{coop.name}</strong>
+        </div>
+
+        <span>
+          <FiCalendar size={20}  href="/dashboard"/>
+        </span>
+
+      </S.Appointment>
+      ))}
+    </S.Section>
+
   );
 }
 

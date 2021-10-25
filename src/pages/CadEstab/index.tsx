@@ -25,16 +25,16 @@ interface CadEstabFormData {
   telefone: string;
   cep: string;
   endereco: string;
-  numero: string;
   cidade: string;
   uf: string;
-  ramo: string;
+  //favorite: string;
 }
 
 const CadEstab: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
+
   const { signOut, user } = useAuth();
 
   const handleSubmit = useCallback(
@@ -49,17 +49,17 @@ const CadEstab: React.FC = () => {
           telefone: Yup.string(),
           cep: Yup.string().required('CEP é obrigatório'),
           endereco: Yup.string().required('Endereço é obrigatório'),
-          numero: Yup.string().required('Número obrigatório'),
+          //numero: Yup.string().required('Número obrigatório'),
           cidade: Yup.string().required('Cidade é obrigatório'),
           uf: Yup.string().required('Estado é obrigatório'),
-          ramo: Yup.string().required('Ramo é obrigatório'),
+          //ramo: Yup.string().required('Ramo é obrigatório'),
         });
 
         await schema.validate(data, { abortEarly: false });
 
         await api.post('/establishment', data);
 
-        history.push('/dashboard2');
+        history.push('/');
 
         addToast({
           type: 'success',
@@ -100,15 +100,13 @@ const CadEstab: React.FC = () => {
             <Input name="telefone" icon={TiSortNumerically} placeholder="Telefone" />
             <Input name="cep" icon={TiSortNumerically} placeholder="CEP" />
             <Input name="endereco" icon={TiWorld} placeholder="Endereço" />
-            <Input name="numeroEnd" icon={TiSortNumerically} placeholder="Número" />
             <Input name="cidade" icon={TiWorld} placeholder="Cidade" />
             <Input name="estado" icon={TiWorld} placeholder="UF" />
-            <Input name="ramo" icon={FiUser} placeholder="Ramo" />
 
-            <Button type="submit">Salvar e continuar</Button>
+            <Button type="submit">Cadastrar</Button>
           </Form>
 
-          <Link to="/">
+          <Link to="/dashboard2">
             <FiArrowLeft />
             Voltar para login
           </Link>
