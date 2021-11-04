@@ -16,7 +16,7 @@ import { useToast } from '../../hooks/toast';
 import { useAuth } from '../../hooks/auth';
 import { Container, Content, AnimationContainer, AvatarInput} from './styles';
 
-import avatarMaria from 'D:/ProjetoF/projeto-web/src/assets/duda.png';
+import avatarMaria from '../../assets/duda.png'
 import logoImg from '../../assets/logo444.png';
 import Menu from '../../components/menu/Navbar';
 

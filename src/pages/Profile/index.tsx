@@ -16,7 +16,7 @@ import { useToast } from '../../hooks/toast';
 import { Container, Content, AvatarInput } from './styles';
 import { useAuth } from '../../hooks/auth';
 
-import avatarMaria from 'D:/ProjetoF/projeto-web/src/assets/duda.png';
+import avatarMaria from '../../assets/duda.png'
 //import avatarJose from '/home/mariabassan/Área de Trabalho/projeto-web/src/assets/jose.jpeg';
 
 interface ProfileFormData {

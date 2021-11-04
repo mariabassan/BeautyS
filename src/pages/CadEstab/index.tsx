@@ -35,7 +35,7 @@ const CadEstab: React.FC = () => {
   const { addToast } = useToast();
   const history = useHistory();
 
-  const { signOut, user } = useAuth();
+  //const { signOut, user } = useAuth();
 
   const handleSubmit = useCallback(
     async (data: CadEstabFormData) => {
