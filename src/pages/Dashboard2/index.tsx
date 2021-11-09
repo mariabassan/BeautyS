@@ -5,7 +5,7 @@ import 'react-day-picker/lib/style.css';
 
 import Carousel from 'react-bootstrap/Carousel'
 
-import { FaPizzaSlice } from 'react-icons/fa';
+//import { FaPizzaSlice } from 'react-icons/fa';
 import { FiPower, FiClock } from 'react-icons/fi';
 
 import { Link } from 'react-router-dom';
