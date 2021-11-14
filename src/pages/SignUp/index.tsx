@@ -91,10 +91,10 @@ const SignUp: React.FC = () => {
               placeholder="Senha"
             />
 
-            <Button type="submit">Cadastrar e prosseguir<Link to="/cad-estab"></Link></Button>
+            <Button type="submit">Cadastrar<Link to="/cad-estab"></Link></Button>
           </Form>
 
-          <Link to="/cad-estab">
+          <Link to="/">
             <FiArrowLeft />
             Voltar para Login
           </Link>

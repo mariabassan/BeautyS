@@ -23,7 +23,7 @@ const Routes: React.FC = () => (
     <Route path="/cad-estab" component={CadEstab} isPrivate/>
 
     <Route path="/colaboradores" component={Colaboradores} isPrivate />
-    <Route path="/cadcolaborador" component={CadColab}is-private/>
+    <Route path="/cadcolaborador" component={CadColab}isPrivate/>
     <Route path="/dashboard" component={Dashboard} isPrivate />
     <Route path="/dashboard2" component={Dash1} isPrivate />
     <Route path="/profile" component={Profile} isPrivate />
