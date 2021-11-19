@@ -18,6 +18,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^5.0.1",
     "date-fns": "^2.14.0",
+    "framer-motion": "4.1.17",
     "node-sass": "^6.0.0",
     "polished": "^3.5.2",
     "react": "^16.13.1",

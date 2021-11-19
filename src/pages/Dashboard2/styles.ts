@@ -47,8 +47,8 @@ export const HeaderProfile = styled.div`
   align-items: center;
 
   img {
-    width: 56px;
-    height: 56px;
+    width: 85px;
+    height: 85px;
     border-radius: 20%;
   }
 

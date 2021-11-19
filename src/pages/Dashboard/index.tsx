@@ -4,17 +4,14 @@ import ptBR from 'date-fns/locale/pt-BR';
 import DayPicker, { DayModifiers } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 
-import { FiPower, FiClock } from 'react-icons/fi';
-import { FaHeart } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { FiClock } from 'react-icons/fi';
 import * as S from './styles';
 
-import logoImg from '../../assets/logo.png';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
-import avatarMaria from '../../assets/duda.png'
 import Menu from '../../components/menu/Navbar';
+import userIcon from '../../assets/user2.png'
 
 interface MonthAvailabilityItem {
   day: number;
@@ -138,7 +135,7 @@ const Dashboard: React.FC = () => {
                 <img
                   src={
                     nextAppointment.user.avatar_url ||
-                    'https://api.adorable.io/avatars/80/abott@adorable.io.png'
+                    userIcon
                   }
                   alt={nextAppointment.user.name}
                 />

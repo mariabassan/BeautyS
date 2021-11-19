@@ -16,8 +16,8 @@ import { useToast } from '../../hooks/toast';
 import { useAuth } from '../../hooks/auth';
 import { Container, Content, AnimationContainer, AvatarInput} from './styles';
 
-import avatarMaria from '../../assets/duda.png'
-import logoImg from '../../assets/logo444.png';
+import userIcon from '../../assets/user2.png'
+import logoImg from '../../assets/logo.png';
 import Menu from '../../components/menu/Navbar';
 
 interface CadColabFormData {
@@ -84,7 +84,6 @@ const CadColab: React.FC = () => {
         data.append('avatar', e.target.files[0]);
 
         api.patch('/cooperator/avatar', data).then(response => {
-          //updateUser(response.data);
 
           addToast({
             type: 'success',
@@ -118,6 +117,13 @@ const CadColab: React.FC = () => {
             <Input name="procedure" icon={FiType} placeholder="Procedimento principal" />
 
             <AvatarInput>
+            <img
+              src={
+                
+                userIcon
+              }
+              alt={user.name}
+            />
             <label htmlFor="avatar">
               <FiCamera size={20} />
               <input type="file" id="avatar" onChange={handleAvatarChange} />

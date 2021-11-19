@@ -13,9 +13,9 @@ import Button from '../../components/Button';
 
 import { useToast } from '../../hooks/toast';
 
-import { Container, Content, AnimationContainer, Background } from './styles';
+import { Container, Content, AnimationContainer, Background, Logo } from './styles';
 
-import logoImg from '../../assets/logo.png';
+import logoBS from '../../assets/logo.png';
 
 interface SignUpFormData {
   name: string;
@@ -75,7 +75,7 @@ const SignUp: React.FC = () => {
       
       <Content>
         <AnimationContainer>
-          <img src={logoImg} alt="BeautyS" />
+          <Logo src={logoBS} alt="Beauty Scheduler" />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Faça seu cadastro</h1>

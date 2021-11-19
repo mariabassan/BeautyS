@@ -10,9 +10,9 @@ import getValidationErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import { Container, Content, AnimationContainer, Background } from './styles';
+import { Container, Content, AnimationContainer, Background, Logo } from './styles';
 
-import logoImg from '../../assets/logo.png';
+import logoBS from '../../assets/logo.png';
 import api from '../../services/api';
 
 interface ResetPasswordFormData {
@@ -79,7 +79,7 @@ const ResetPassword: React.FC = () => {
     <Container>
       <Content>
         <AnimationContainer>
-          <img src={logoImg} alt="BeautyScheduler" />
+          <Logo src={logoBS} alt="Beauty Scheduler" />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Resetar senha</h1>

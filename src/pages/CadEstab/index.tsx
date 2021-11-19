@@ -16,7 +16,7 @@ import { useToast } from '../../hooks/toast';
 import { useAuth } from '../../hooks/auth';
 import { Container, Content, AnimationContainer, Background } from './styles';
 
-import logoImg from '../../assets/logo444.png';
+import logoImg from '../../assets/logo.png';
 
 interface CadEstabFormData {
   cnpj: string;

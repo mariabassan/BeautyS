@@ -86,3 +86,7 @@ export const Background = styled.div`
   background: url(${signInBackgroundImg}) no-repeat center;
   background-size: cover;
 `;
+
+export const Logo = styled.img`
+  max-height: 350px;
+`

@@ -6,15 +6,13 @@ import 'react-day-picker/lib/style.css';
 import Carousel from 'react-bootstrap/Carousel'
 
 //import { FaPizzaSlice } from 'react-icons/fa';
-import { FiPower, FiClock } from 'react-icons/fi';
+///import { FiPower, FiClock } from 'react-icons/fi';
 
-import { Link } from 'react-router-dom';
 import * as S from './styles';
 
-import logoImg from '../../assets/logo33.png';
-import { useAuth } from '../../hooks/auth';
+//import { useAuth } from '../../hooks/auth';
 
-import avatarUser from '../../assets/profile-user.png';
+//import userIcon from '../../assets/user2.png'
 
 import galeria1 from '../../assets/galeria1.png';
 import galeria2 from '../../assets/galeria2.png';

@@ -16,7 +16,7 @@ import { useToast } from '../../hooks/toast';
 import { Container, Content, AvatarInput } from './styles';
 import { useAuth } from '../../hooks/auth';
 
-import avatarMaria from '../../assets/duda.png'
+import userIcon from '../../assets/user2.png'
 //import avatarJose from '/home/mariabassan/Área de Trabalho/projeto-web/src/assets/jose.jpeg';
 
 interface ProfileFormData {
@@ -153,7 +153,7 @@ const Profile: React.FC = () => {
             <img
               src={
                 user.avatar_url ||
-                avatarMaria
+                userIcon
               }
               alt={user.name}
             />
