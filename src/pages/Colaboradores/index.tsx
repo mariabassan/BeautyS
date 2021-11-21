@@ -1,21 +1,21 @@
 import React, { useState, useEffect} from 'react';
 import 'react-day-picker/lib/style.css';
 
-import Card from 'react-bootstrap/Card';
-import CardDeck from 'react-bootstrap/CardDeck';
+//import Card from 'react-bootstrap/Card';
+//import CardDeck from 'react-bootstrap/CardDeck';
 
-import {FiCalendar, FiPlus} from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import {FiCalendar} from 'react-icons/fi';
+//import { Link } from 'react-router-dom';
 import * as S from './styles';
 
-import logoImg from '../../assets/logo.png';
-import { useAuth } from '../../hooks/auth';
+//import logoImg from '../../assets/logo.png';
+//import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
 import avatarUser from '../../assets/profile-user.png';
-import { Content } from '../SignIn/styles';
-import Menu from '../../components/menu/Navbar';
-import addC from '../../assets/but/add.png';
+//import { Content } from '../SignIn/styles';
+//import Menu from '../../components/menu/Navbar';
+//import addC from '../../assets/but/add.png';
 
 interface Cooperator {
   id: string;
@@ -25,7 +25,7 @@ interface Cooperator {
 }
 
 const Colaboradores: React.FC = () => {
-  const { signOut, user} = useAuth();
+  //const { signOut, user} = useAuth();
 
 	const [cooperator, setCooperator] = useState<any[]>([]);
   const [ loading, setLoading ] = useState(true);
@@ -73,14 +73,14 @@ return (
         <div>
           <img
             src={coop.avatar || avatarUser}
+            alt={coop.name}
           />
 
           <strong>{coop.name}</strong>
+          <button className="white" type="button" onClick={event =>  window.location.href='/dashboard'}><FiCalendar size={25} /></button>
         </div>
 
-        <span>
-          <FiCalendar size={20}  href="/dashboard"/>
-        </span>
+        
 
       </S.Appointment>
       ))}

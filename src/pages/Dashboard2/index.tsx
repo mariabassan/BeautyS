@@ -1,18 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import React, { useCallback } from 'react';
+import React from 'react';
 import 'react-day-picker/lib/style.css';
 
 import Carousel from 'react-bootstrap/Carousel'
 
-//import { FaPizzaSlice } from 'react-icons/fa';
-///import { FiPower, FiClock } from 'react-icons/fi';
-
 import * as S from './styles';
-
-//import { useAuth } from '../../hooks/auth';
-
-//import userIcon from '../../assets/user2.png'
 
 import galeria1 from '../../assets/galeria1.png';
 import galeria2 from '../../assets/galeria2.png';

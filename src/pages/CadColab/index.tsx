@@ -32,7 +32,7 @@ const CadColab: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
-  const { signOut, user } = useAuth();
+  const { user } = useAuth();
 
   const handleSubmit = useCallback(
     async (data: CadColabFormData) => {

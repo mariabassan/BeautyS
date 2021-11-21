@@ -3,7 +3,7 @@ import { Switch } from 'react-router-dom';
 
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
-import Dashboard from '../pages/Dashboard';
+import Agenda from '../pages/Agenda';
 import ForgotPassword from '../pages/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword';
 import Profile from '../pages/Profile';
@@ -25,7 +25,7 @@ const Routes: React.FC = () => (
 
     <Route path="/colaboradores" component={Colaboradores} isPrivate />
     <Route path="/cadcolaborador" component={CadColab}isPrivate/>
-    <Route path="/dashboard" component={Dashboard} isPrivate />
+    <Route path="/dashboard" component={Agenda} isPrivate />
     <Route path="/dashboard2" component={Dash1} isPrivate />
     <Route path="/dashboard3" component={Dash3} isPrivate />
     <Route path="/profile" component={Profile} isPrivate />

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { BurgerSVG } from './IconSVG'
+//import { BurgerSVG } from './IconSVG'
 import { motion } from 'framer-motion'
 
 export const Container = styled.div`
@@ -12,6 +12,7 @@ export const Container = styled.div`
 
 export const Header = styled.header`
   position: fixed;
+  background-color: rgba(244,255,253, 0.9);
   top: 0;
   left: 0;
   right: 0;
@@ -25,7 +26,7 @@ export const Header = styled.header`
 `
 
 export const Logo = styled.img`
-  max-height: 200px;
+  max-height: 180px;
   cursor: pointer;
 `
 

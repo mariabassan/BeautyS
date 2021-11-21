@@ -24,18 +24,20 @@ interface Appointment {
   hourFormatted: string;
   user: {
     name: string;
-    avatar_url: string;
+    avatar: string;
   };
 }
 
-const Dashboard: React.FC = () => {
-  const { signOut, user } = useAuth();
+const Agenda: React.FC = () => {
+  const { user } = useAuth();
 
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
+
   const [monthAvailability, setMonthAvailability] = useState<
     MonthAvailabilityItem[]
   >([]);
+
   const [appointments, setAppointments] = useState<Appointment[]>([]);
 
   const handleDateChange = useCallback((day: Date, modifiers: DayModifiers) => {
@@ -61,7 +63,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     api
-      .get<Appointment[]>('/appointments/me', {
+      .get<Appointment[]>('/appointments', {
         params: {
           year: selectedDate.getFullYear(),
           month: selectedDate.getMonth() + 1,
@@ -134,7 +136,7 @@ const Dashboard: React.FC = () => {
               <div>
                 <img
                   src={
-                    nextAppointment.user.avatar_url ||
+                    nextAppointment.user.avatar ||
                     userIcon
                   }
                   alt={nextAppointment.user.name}
@@ -166,13 +168,13 @@ const Dashboard: React.FC = () => {
                 <div>
                   <img
                     src={
-                      appointment.user.avatar_url ||
-                      'https://api.adorable.io/avatars/56/abott@adorable.io.png'
+                      appointment.user?.avatar||
+                      userIcon
                     }
-                    alt={appointment.user.name}
+                    alt={appointment.user?.name}
                   />
 
-                  <strong>{appointment.user.name}</strong>
+                  <strong>{appointment.user?.name}</strong>
                 </div>
               </S.Appointment>
             ))}
@@ -194,13 +196,13 @@ const Dashboard: React.FC = () => {
                 <div>
                   <img
                     src={
-                      appointment.user.avatar_url ||
-                      'https://api.adorable.io/avatars/56/abott@adorable.io.png'
+                      
+                      userIcon
                     }
-                    alt={appointment.user.name}
+                    alt={appointment.user?.name}
                   />
 
-                  <strong>{appointment.user.name}</strong>
+                  <strong>{appointment.user?.name}</strong>
                 </div>
               </S.Appointment>
             ))}
@@ -238,4 +240,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default Agenda;

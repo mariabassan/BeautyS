@@ -17,7 +17,7 @@ const DefaultOverlayContent: React.FC<Props> = ({ label, description }) => {
 
       <Buttons>
         <button>Acessar página</button>
-        <button className="white">Existing Inventory</button>
+        <button className="white" onClick={event =>  window.location.href='/dashboard3'}>Home</button>
       </Buttons>
     </Container>
   )

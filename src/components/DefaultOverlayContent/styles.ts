@@ -8,7 +8,7 @@ export const Container = styled.div`
 `
 
 export const Heading = styled.div`
-  margin-top: 16.5vh;
+  margin-top: 25vh;
 
   width: 100%;
   text-align: center;

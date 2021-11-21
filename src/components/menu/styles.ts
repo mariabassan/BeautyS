@@ -15,7 +15,7 @@ export const StyledBurger = styled.div<INav>`
   display: none;
   font-family: 'Zilla Slab';
 
-  @media (max-width: 768px) {
+  @media (max-width: 976px) {
     display: flex;
     justify-content: space-around;
     flex-flow: column nowrap;
@@ -46,11 +46,11 @@ export const Nav = styled.nav`
   height: 100%;
   display: flex;
   justify-content: space-between;
-  background-color: #fff1e3;
+  background-color: rgba(244,255,253, 0.9);
   align-items: center;
   position: relative;
 
-  @media (max-width: 678px) {
+  @media (max-width: 976px) {
     width: 100vw;
   }
 
@@ -98,7 +98,7 @@ export const Ul = styled.ul<INav>`
     padding: 18px 15px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 976px) {
     flex-flow: column nowrap;
     position: fixed;
     transform: ${(props) => props.open ? 'translateX(0)' : 'translateX(100%)'};
@@ -110,7 +110,7 @@ export const Ul = styled.ul<INav>`
     transition: transform 0.3s ease-in-out;
     z-index: 9;
     justify-content: normal;
-    background: #fff1e3;
+    background-color: rgba(244,255,253, 0.9);
 
     li {
       color: #000;
@@ -138,7 +138,7 @@ export const LogoUl = styled.img`
   margin: 20px 50px 20px 5%;
   display: none;
 
-  @media (max-width: 768px) {
+  @media (max-width: 868px) {
     display: flex;
     width: 160px;
     height: 100px;

@@ -23,13 +23,13 @@ const UniqueOverlay: React.FC = () => {
       <Footer style={{ opacity }}>
         <ul>
           <li>
-            <a href="#">PUC Campinas</a>
+            <a href="/dashboard3">PUC Campinas</a>
           </li>
           <li>
-            <a href="#">Projeto de Conclusão de Curso</a>
+            <a href="/dashboard3">Projeto de Conclusão de Curso</a>
           </li>
           <li>
-            <a href="#">Sistemas de Informação 2021</a>
+            <a href="/dashboard3">Sistemas de Informação 2021</a>
           </li>
         </ul>
       </Footer>

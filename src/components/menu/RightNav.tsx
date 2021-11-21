@@ -39,8 +39,8 @@ function RightNav(props: Props) {
               </Link>
             </div>
           </F.HeaderProfile>
-        </F.HeaderContent>
-        <F.DivEmpty></F.DivEmpty>
+          </F.HeaderContent>
+        
         <NavLink to="/colaboradores"
             activeStyle={{
               fontWeight: "bold",
@@ -80,6 +80,7 @@ function RightNav(props: Props) {
             </button>
           </F.ButtonOff>
         </li>
+        
       </S.Ul>      
     </Router >
   )
