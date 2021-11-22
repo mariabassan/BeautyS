@@ -63,7 +63,7 @@ return (
               </Card.Text>
             </Card.Body>
             <Card.Footer>
-              <button className="card__btn" type="button" onClick={event =>  window.location.href='/dashboard'}>Acessar agenda</button>
+              <button className="card__btn" type="button" key={coop._id} onClick={event =>  window.location.href='/dashboard'}>Acessar agenda</button>
             </Card.Footer>
           </Card>
         </CardDeck>
