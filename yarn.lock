@@ -1379,6 +1379,11 @@
   resolved "https://registry.yarnpkg.com/@emotion/unitless/-/unitless-0.7.5.tgz#77211291c1900a700b8a78cfafda3160d76949ed"
   integrity sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==
 
+"@fontsource/hanuman@^4.5.1":
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/@fontsource/hanuman/-/hanuman-4.5.1.tgz#f4b53f8a46661d850ade80989fe58f1d3ba01920"
+  integrity sha512-W5ePzGUAbcVnaG19Y0DHtN1mV87EP4lcccfW1V8TOBY1osoAH7QbLekhVTKexgz3EMNsNRyR9piwUgKYnrzTuw==
+
 "@formatjs/ecma402-abstract@1.9.3":
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/@formatjs/ecma402-abstract/-/ecma402-abstract-1.9.3.tgz#00892014c805935b5b1345d238246e9bf3a2de50"

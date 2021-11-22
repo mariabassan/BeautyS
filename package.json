@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fontsource/hanuman": "^4.5.1",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/web": "react-navigation/web",
     "@testing-library/jest-dom": "^4.2.4",

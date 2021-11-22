@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import "@fontsource/hanuman";
 
 export const colors = {
   mediumblue: '#77BCD4',
@@ -27,6 +28,7 @@ export const colors = {
 export const fonts = {
   annie: "'Annie Use Your Telescope', cursive",
   roboto: "'Roboto Slab', serif;",
+  hanuman: "Hanuman"
 };
 
 export const calculateResponsiveSize = (min: number, max: number) =>

@@ -1,20 +1,18 @@
 import React, { useState, useEffect} from 'react';
 import 'react-day-picker/lib/style.css';
 
-//import Card from 'react-bootstrap/Card';
-//import CardDeck from 'react-bootstrap/CardDeck';
+import Card from 'react-bootstrap/Card';
+import CardDeck from 'react-bootstrap/CardDeck';
 
 import {FiCalendar} from 'react-icons/fi';
 //import { Link } from 'react-router-dom';
 import * as S from './styles';
 
-//import logoImg from '../../assets/logo.png';
-//import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
 import avatarUser from '../../assets/profile-user.png';
-//import { Content } from '../SignIn/styles';
-//import Menu from '../../components/menu/Navbar';
+import addColaborador from '../../assets/addcolaborador.png';
+import Menu from '../../components/menu/Navbar';
 //import addC from '../../assets/but/add.png';
 
 interface Cooperator {
@@ -25,7 +23,6 @@ interface Cooperator {
 }
 
 const Colaboradores: React.FC = () => {
-  //const { signOut, user} = useAuth();
 
 	const [cooperator, setCooperator] = useState<any[]>([]);
   const [ loading, setLoading ] = useState(true);
@@ -40,53 +37,45 @@ const Colaboradores: React.FC = () => {
     },[])
 
 return (
-    /*<S.Container>
-      <Menu />
-      <S.Section>
-        <Content>
-          <CardDeck>
-             {cooperator.map((coop) => (
-                <Card key={coop._id}>
-                  <Card.Img variant="top" 
-                  src={coop.avatar || avatarUser}
-                  />
-                  <Card.Body>
-                    <Card.Title>{coop.name}</Card.Title>
-                    <Card.Text>
-                      {coop.procedure}
-                    </Card.Text>
-                  </Card.Body>
-                  <Card.Footer>
-                    <Card.Link href="/dashboard"><FiCalendar/></Card.Link>
-                  </Card.Footer>
-                </Card>
-              ))}
-          </CardDeck>
-        </Content>
-      </S.Section>
-    </S.Container>*/
+<S.Container>
+  <Menu/>
+  <S.Section>
+    <S.DivTitle><strong>Colaboradores</strong></ S.DivTitle>
 
-    <S.Section>
-      <strong>Colaboradores</strong>
+      <S.Content>
+
+      <S.CardColab className="wrapper">
+        <CardDeck >
+          <Card.Link className="card" href="/dashboard">
+            <Card.Img className="card__image" src={addColaborador}/>
+          </Card.Link>
+        </CardDeck>
       {cooperator.map((coop) => (
-      <S.Appointment key={coop._id}>
-        <div>
-          <img
+        <CardDeck  key={coop._id}>
+          <Card className="card" >
+            <Card.Img className="card__image" variant="top" 
             src={coop.avatar || avatarUser}
-            alt={coop.name}
-          />
-
-          <strong>{coop.name}</strong>
-          <button className="white" type="button" onClick={event =>  window.location.href='/dashboard'}><FiCalendar size={25} /></button>
-        </div>
-
-        
-
-      </S.Appointment>
+            />
+            <Card.Body>
+              <Card.Title className="card__title">{coop.name}</Card.Title>
+              <Card.Text className="card__description">
+                {coop.procedure}
+              </Card.Text>
+            </Card.Body>
+            <Card.Footer>
+              <button className="card__btn" type="button" onClick={event =>  window.location.href='/dashboard'}>Acessar agenda</button>
+            </Card.Footer>
+          </Card>
+        </CardDeck>
       ))}
-    </S.Section>
+      </ S.CardColab>
+      </S.Content>
+  </S.Section>
+</S.Container>
 
   );
 }
 
 export default Colaboradores;
+
+//<Card.Link className="card__btn" href="/dashboard"><FiCalendar/>Acessar agenda</Card.Link>
