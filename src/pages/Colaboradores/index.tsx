@@ -4,7 +4,7 @@ import 'react-day-picker/lib/style.css';
 import Card from 'react-bootstrap/Card';
 import CardDeck from 'react-bootstrap/CardDeck';
 
-import {FiCalendar} from 'react-icons/fi';
+//import {FiCalendar} from 'react-icons/fi';
 //import { Link } from 'react-router-dom';
 import * as S from './styles';
 
@@ -63,7 +63,7 @@ return (
               </Card.Text>
             </Card.Body>
             <Card.Footer>
-              <button className="card__btn" type="button" key={coop._id} onClick={event =>  window.location.href='/dashboard'}>Acessar agenda</button>
+              <button className="card__btn" type="button" key={coop._id} onClick={event =>  window.location.href='/agenda'}>Acessar agenda</button>
             </Card.Footer>
           </Card>
         </CardDeck>

@@ -10,8 +10,9 @@ import Profile from '../pages/Profile';
 import CadEstab from '../pages/CadEstab';
 import Colaboradores from '../pages/Colaboradores';
 import CadColab from '../pages/CadColab';
-import Dash1 from '../pages/Dashboard2';
-import Dash3 from '../pages/Dashboard3';
+import DashAlt from '../pages/Dashboard2';
+import Dash from '../pages/Dashboard3';
+import Procedure from '../pages/Procedures';
 
 import Route from './Route';
 
@@ -25,9 +26,10 @@ const Routes: React.FC = () => (
 
     <Route path="/colaboradores" component={Colaboradores} isPrivate />
     <Route path="/cadcolaborador" component={CadColab}isPrivate/>
-    <Route path="/dashboard" component={Agenda} isPrivate />
-    <Route path="/dashboard2" component={Dash1} isPrivate />
-    <Route path="/dashboard3" component={Dash3} isPrivate />
+    <Route path="/procedures" component={Procedure} isPrivate />
+    <Route path="/agenda" component={Agenda} isPrivate />
+    <Route path="/dashboardAlt" component={DashAlt} isPrivate />
+    <Route path="/dashboard" component={Dash} isPrivate />
     <Route path="/profile" component={Profile} isPrivate />
   </Switch>
 );

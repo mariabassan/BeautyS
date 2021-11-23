@@ -106,7 +106,7 @@ const CadEstab: React.FC = () => {
             <Button type="submit">Cadastrar</Button>
           </Form>
 
-          <Link to="/dashboard2">
+          <Link to="/dashboard">
             <FiArrowLeft />
             Voltar para login
           </Link>

@@ -87,7 +87,7 @@ const Profile: React.FC = () => {
 
         updateUser(response.data);
 
-        history.push('/dashboard2');
+        history.push('/dashboard');
 
         addToast({
           type: 'success',
@@ -138,7 +138,7 @@ const Profile: React.FC = () => {
     <Container>
       <header>
         <div>
-          <Link to="/dashboard2">
+          <Link to="/dashboard">
             <FiArrowLeft size={32} />
           </Link>
         </div>

@@ -53,7 +53,7 @@ function RightNav(props: Props) {
                 alt='Colaboradores'/>
             </li>
         </NavLink>
-        <NavLink to="/dashboard"
+        <NavLink to="/agenda"
             activeStyle={{
               fontWeight: "bold",
               color: "#0DADEA"
@@ -63,7 +63,7 @@ function RightNav(props: Props) {
                 src={bAgenda}
                 alt='Agenda'/></li>
         </NavLink>
-        <NavLink to="/dashboard2"
+        <NavLink to="/dashboardAlt"
             activeStyle={{
               fontWeight: "bold",
               color: "#0DADEA"

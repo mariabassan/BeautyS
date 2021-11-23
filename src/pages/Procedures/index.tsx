@@ -6,7 +6,7 @@ import CardDeck from 'react-bootstrap/CardDeck';
 import * as S from './styles';
 import api from '../../services/api';
 
-import addProcedure from '../../assets/addcolaborador.png';
+import addProcedure from '../../assets/addprocedure.png';
 import Menu from '../../components/menu/Navbar';
 
 interface Procedure {
@@ -54,7 +54,7 @@ return (
               </Card.Text>
             </Card.Body>
             <Card.Footer>
-              <button className="card__btn" type="button"></button>
+              <button className="card__btn" type="button">Editar</button>
             </Card.Footer>
           </Card>
         </CardDeck>
