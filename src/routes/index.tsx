@@ -13,6 +13,7 @@ import CadColab from '../pages/CadColab';
 import DashAlt from '../pages/Dashboard2';
 import Dash from '../pages/Dashboard3';
 import Procedure from '../pages/Procedures';
+import AgendaColab from '../pages/AgendaColab';
 
 import Route from './Route';
 
@@ -31,6 +32,7 @@ const Routes: React.FC = () => (
     <Route path="/dashboardAlt" component={DashAlt} isPrivate />
     <Route path="/dashboard" component={Dash} isPrivate />
     <Route path="/profile" component={Profile} isPrivate />
+    <Route path="/agendaColab/:cooperatorId" component={AgendaColab} isPrivate />
   </Switch>
 );
 

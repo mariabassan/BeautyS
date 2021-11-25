@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import CardDeck from 'react-bootstrap/CardDeck';
 
 //import {FiCalendar} from 'react-icons/fi';
-//import { Link } from 'react-router-dom';
+import { useHistory, Link, useLocation } from 'react-router-dom';
 import * as S from './styles';
 
 import api from '../../services/api';
@@ -26,6 +26,9 @@ const Colaboradores: React.FC = () => {
 
 	const [cooperator, setCooperator] = useState<any[]>([]);
   const [ loading, setLoading ] = useState(true);
+
+  const history = useHistory();
+  const routerParams = useLocation();
 
   useEffect(() => {
     async function loadCooperator(){
@@ -63,7 +66,12 @@ return (
               </Card.Text>
             </Card.Body>
             <Card.Footer>
-              <button className="card__btn" type="button" key={coop._id} onClick={event =>  window.location.href='/agenda'}>Acessar agenda</button>
+            <button className="card__btn" type="button" onClick={() => {
+                history.push(`/agendaColab/${coop.id}/`);
+                console.log(history);
+                }}>
+                Acessar agenda
+              </button>
             </Card.Footer>
           </Card>
         </CardDeck>
@@ -77,5 +85,17 @@ return (
 }
 
 export default Colaboradores;
+//<button className="card__btn" type="button" key={coop._id} onClick={event =>  window.location.href='/agenda'}>Acessar agenda</button>
+//<Link to={'/agendaColab/' + coop._id} className='card__btn'>Acessar agenda</Link> 
+//<Link to='/agendaColab?q=coop._id'> </Link>
 
-//<Card.Link className="card__btn" href="/dashboard"><FiCalendar/>Acessar agenda</Card.Link>
+/*<button className="card__btn" type="button" onClick={() => {
+                history.push(`/agendaColab/${coop.id}`);
+                console.log(history);
+                }}>
+                Acessar agenda
+              </button>*/
+/*history.push({
+                  pathname: `/agendaColab/${coop.id}`,
+                  //search: ``,
+                });*/
