@@ -32,7 +32,7 @@ interface Appointment {
 //:cooperator_id/month-availability
 const AgendaColab: React.FC = () => {
   const { user } = useAuth();
-  const routerParams = useLocation();
+  const routerParams = useLocation().pathname;
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
   console.log(routerParams);

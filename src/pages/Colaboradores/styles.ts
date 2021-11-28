@@ -74,7 +74,7 @@ export const CardColab = styled.div`
       font-weight: bold;
       font-size: 1rem;
       margin: 1rem;
-      border: 2px solid #9C714F;
+      
       background: transparent;
       color: #9C714F;
       border-radius: 0.2rem;

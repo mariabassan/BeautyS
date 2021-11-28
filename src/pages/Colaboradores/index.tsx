@@ -4,8 +4,7 @@ import 'react-day-picker/lib/style.css';
 import Card from 'react-bootstrap/Card';
 import CardDeck from 'react-bootstrap/CardDeck';
 
-//import {FiCalendar} from 'react-icons/fi';
-import { useHistory, Link, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import * as S from './styles';
 
 import api from '../../services/api';
@@ -13,7 +12,6 @@ import api from '../../services/api';
 import avatarUser from '../../assets/profile-user.png';
 import addColaborador from '../../assets/addcolaborador.png';
 import Menu from '../../components/menu/Navbar';
-//import addC from '../../assets/but/add.png';
 
 interface Cooperator {
   id: string;
@@ -28,7 +26,7 @@ const Colaboradores: React.FC = () => {
   const [ loading, setLoading ] = useState(true);
 
   const history = useHistory();
-  const routerParams = useLocation();
+  //const routerParams = useLocation();
 
   useEffect(() => {
     async function loadCooperator(){
@@ -67,8 +65,8 @@ return (
             </Card.Body>
             <Card.Footer>
             <button className="card__btn" type="button" onClick={() => {
-                history.push(`/agendaColab/${coop.id}/`);
-                console.log(history);
+                history.push(`/${coop.id}/`);
+                //console.log(history);
                 }}>
                 Acessar agenda
               </button>

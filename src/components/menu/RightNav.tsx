@@ -2,12 +2,7 @@ import React from 'react'
 import * as S from './styles';
 import * as F from '../../pages/Dashboard2/styles';
 
-import bAgenda from '../../assets/but/agenda.png';
-import bColab from '../../assets/but/colab.png';
-//import bProc from '../../assets/but/proc.png';
-import bRelatorio from '../../assets/but/relatorio.png';
-
-import { BrowserRouter as Router, NavLink, Link } from "react-router-dom";
+import { BrowserRouter as Router, useHistory } from "react-router-dom";
 
 import { FiPower } from 'react-icons/fi';
 import { useAuth } from '../../hooks/auth';
@@ -19,11 +14,13 @@ type Props = {
 
 function RightNav(props: Props) {
   const { signOut, user} = useAuth();
-  
+  const history = useHistory();
+
   return (
     <Router>
       <S.Ul open={props.open}>
         <F.HeaderContent>
+        <li>
           <F.HeaderProfile>
             <img
               src={
@@ -34,45 +31,37 @@ function RightNav(props: Props) {
             />
             <div>
               <span>Bem-vindo</span>
-              <Link to="/profile">
-              <strong>{user.name}</strong>
-              </Link>
+              <button className="button-profile" type="button" onClick={() => {
+                history.push(`/profile`);}}><strong>{user.name}</strong></button>
             </div>
           </F.HeaderProfile>
+          </li>
           </F.HeaderContent>
-        
-        <NavLink to="/colaboradores"
-            activeStyle={{
-              fontWeight: "bold",
-              color: "#0DADEA"
-            }}
-          >
+          
             <li>
-              <img
-                src={bColab}
-                alt='Colaboradores'/>
+            <button className="button-menu" type="button" onClick={() => {
+                history.push(`/colaboradores`);}}>
+                  COLABORADORES
+            </button>
             </li>
-        </NavLink>
-        <NavLink to="/agenda"
-            activeStyle={{
-              fontWeight: "bold",
-              color: "#0DADEA"
-            }}
-          >
-            <li><img
-                src={bAgenda}
-                alt='Agenda'/></li>
-        </NavLink>
-        <NavLink to="/dashboardAlt"
-            activeStyle={{
-              fontWeight: "bold",
-              color: "#0DADEA"
-            }}
-          >
-            <li><img
-                src={bRelatorio}
-                alt='Relatórios'/></li>
-        </NavLink>
+            <li>
+            <button className="button-menu" type="button" onClick={() => {
+                history.push(`/procedures`);}}>
+                  PROCEDIMENTOS
+            </button>
+            </li>
+            <li>
+            <button className="button-menu" type="button" onClick={() => {
+                history.push(`/agenda`);}}>
+                  AGENDA
+            </button>
+            </li>
+            <li>
+            <button className="button-menu" type="button" onClick={() => {
+                history.push(`/dashboardAlt`);}}>
+                  RELATORIOS
+            </button>
+            </li>
         <li>
           <F.ButtonOff>
             <button type="button" onClick={signOut}>

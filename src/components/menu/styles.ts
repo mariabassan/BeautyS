@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import butColab from '../../assets/but/colab.png';
+
 
 interface INav {
   open: boolean;
@@ -15,7 +17,7 @@ export const StyledBurger = styled.div<INav>`
   display: none;
   font-family: 'Zilla Slab';
 
-  @media (max-width: 976px) {
+  @media (max-width: 1220px) {
     display: flex;
     justify-content: space-around;
     flex-flow: column nowrap;
@@ -42,7 +44,7 @@ export const StyledBurger = styled.div<INav>`
 `
 
 export const Nav = styled.nav`
-  font-family: 'Zilla Slab';
+  font-family: Hanuman;  
   height: 100%;
   display: flex;
   justify-content: space-between;
@@ -50,7 +52,7 @@ export const Nav = styled.nav`
   align-items: center;
   position: relative;
 
-  @media (max-width: 976px) {
+  @media (max-width: 1220px) {
     width: 100vw;
   }
 
@@ -68,7 +70,7 @@ export const Nav = styled.nav`
 `
 
 export const Ul = styled.ul<INav>`
-  font-family: 'basic title font';
+  font-family: Hanuman;
   list-style: none;
   display: flex;
   flex-flow: row nowrap;
@@ -98,7 +100,41 @@ export const Ul = styled.ul<INav>`
     padding: 18px 15px;
   }
 
-  @media (max-width: 976px) {
+  .button-menu{
+      padding: 0.5rem;
+      font-family: Hanuman;
+      font-weight: bold;
+      font-size: 15px;
+      background: transparent;
+      border: 0.5px solid #dbe5e3;
+      border-radius: 0.5rem;
+      color: #DDBEA9;
+      transition: background 200ms ease-in, color 200ms ease-in;
+
+      &:hover{
+        overflow: hidden;
+        box-shadow: 0 2px 10px #c3ccca;
+        border-radius: 0.5rem;
+      }
+  }
+
+  .button-profile {
+    padding: 0;
+    font-family: Hanuman;
+    font-weight: bold;
+    font-size: 20px;
+    background: transparent;
+    border: 0;
+    color: #DDBEA9;
+    transition: background 200ms ease-in, color 200ms ease-in;
+
+    &:hover{
+      color: #ff9000;
+      overflow: hidden;
+    }
+  }
+
+  @media (max-width: 1220px) {
     flex-flow: column nowrap;
     position: fixed;
     transform: ${(props) => props.open ? 'translateX(0)' : 'translateX(100%)'};
@@ -119,15 +155,50 @@ export const Ul = styled.ul<INav>`
       &:hover {
         color: #0DADEA;
       }
+
+    .button-menu{
+      {
+        padding: 0.2rem;
+        font-family: Hanuman;
+        font-weight: bold;
+        font-size: 15px;
+        background: transparent;
+        border: 0.5px solid #dbe5e3;
+        border-radius: 0.5rem;
+        color: #DDBEA9;
+        transition: background 200ms ease-in, color 200ms ease-in;
+  
+        &:hover{
+          overflow: hidden;
+          box-shadow: 0 2px 10px #c3ccca;
+          border-radius: 0.5rem;
+        }
+      }
+    }
+
+    .button-profile {
+      padding: 0;
+      font-family: Hanuman;
+      font-weight: bold;
+      font-size: 20px;
+      background: transparent;
+      border: 0;
+      color: #DDBEA9;
+      transition: background 200ms ease-in, color 200ms ease-in;
+
+      &:hover{
+        color: #ff9000;
+        overflow: hidden;
+      }
     }
   }
 `
 
 export const Logo = styled.img`
-  margin: 20px 50px 20px 7%;
-  width: 160px;
-  height: 170px;
+  margin-left: 25px;
+  height: 180px;
   object-fit: contain;
+  cursor: pointer;
 
   @media (max-width: 1250px) {
     margin: 20px 50px 20px 5%;
@@ -138,7 +209,7 @@ export const LogoUl = styled.img`
   margin: 20px 50px 20px 5%;
   display: none;
 
-  @media (max-width: 868px) {
+  @media (max-width: 1220px) {
     display: flex;
     width: 160px;
     height: 100px;
@@ -172,3 +243,5 @@ export const Icon = styled.div`
       }
   }
 `
+//font-family: 'basic title font';
+//font-family: 'Zilla Slab';

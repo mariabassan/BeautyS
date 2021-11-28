@@ -11,7 +11,7 @@ export const HeaderContent = styled.div`
   display: flex;
   align-itens: center;
   justify-content:space-around; 
-  padding: 0px 180px; 
+  padding: 0px 40px; 
 `;
 
 export const logo = styled.div`
@@ -71,16 +71,6 @@ export const HeaderProfile = styled.div`
       }
     }
   }
-
-  button {
-    margin-left: auto;
-    background: none;
-    border: none;
-
-    svg {
-      color: #696765;
-    }
-  }
 `;
 
 export const Content = styled.main`
@@ -92,17 +82,4 @@ export const Content = styled.main`
 export const Section = styled.section`
   margin-top: 48px;
 
-  > strong {
-    color: #999591;
-    font-size: 20px;
-    line-height: 26px;
-    border-bottom: 1px solid #3e3b47;
-    display: block;
-    padding-bottom: 16px;
-    margin-bottom: 16px;
-  }
-
-  > p {
-    color: #999591;
-  }
 `;

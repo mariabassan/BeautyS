@@ -32,7 +32,7 @@ const Routes: React.FC = () => (
     <Route path="/dashboardAlt" component={DashAlt} isPrivate />
     <Route path="/dashboard" component={Dash} isPrivate />
     <Route path="/profile" component={Profile} isPrivate />
-    <Route path="/agendaColab/:cooperatorId" component={AgendaColab} isPrivate />
+    <Route path="/:cooperatorId" component={AgendaColab} isPrivate />
   </Switch>
 );
 
