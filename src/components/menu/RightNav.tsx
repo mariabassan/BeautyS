@@ -6,7 +6,7 @@ import { BrowserRouter as Router, useHistory } from "react-router-dom";
 
 import { FiPower } from 'react-icons/fi';
 import { useAuth } from '../../hooks/auth';
-import avatarUser from '../../assets/profile-user.png';
+//import avatarUser from '../../assets/profile-user.png';
 
 type Props = {
   open: boolean;
@@ -24,8 +24,7 @@ function RightNav(props: Props) {
           <F.HeaderProfile>
             <img
               src={
-              user.avatar_url ||
-              avatarUser
+              user.avatar_url
               }
               alt={user.name}
             />

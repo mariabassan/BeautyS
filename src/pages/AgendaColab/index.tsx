@@ -26,7 +26,12 @@ interface Appointment {
   user: {
     id: string;
     name: string;
-    avatar: string;
+    avatar_url: string;
+  };
+  useradmin: {
+    id: string;
+    name: string;
+    avatar_url: string;
   };
 }
 //:cooperator_id/month-availability
@@ -85,7 +90,7 @@ const AgendaColab: React.FC = () => {
         //console.log(cooperatorId);
       });
   }, [selectedDate]);
-
+  console.log(appointments);
   const disableDays = useMemo(() => {
     return monthAvailability
       .filter(monthDay => monthDay.available === false)
@@ -141,14 +146,11 @@ const AgendaColab: React.FC = () => {
               <strong>Atendimento a seguir</strong>
               <div>
                 <img
-                  src={
-                    nextAppointment.user.avatar ||
-                    userIcon
-                  }
-                  alt={nextAppointment.user.name}
+                  src={ nextAppointment.user?.avatar_url || nextAppointment.useradmin?.avatar_url }
+                  alt={ nextAppointment.user?.name || nextAppointment.useradmin?.name }
                 />
 
-                <strong>{nextAppointment.user.name}</strong>
+                <strong>{ nextAppointment.user?.name || nextAppointment.useradmin?.name }</strong>
                 <span>
                   <FiClock size={24} />
                   {nextAppointment.hourFormatted}
@@ -172,15 +174,12 @@ const AgendaColab: React.FC = () => {
                 </span>
 
                 <div>
-                  <img
-                    src={
-                      appointment.user?.avatar||
-                      userIcon
-                    }
-                    alt={appointment.user?.name}
+                <img
+                    src={ appointment.user?.avatar_url|| appointment.useradmin?.avatar_url }
+                    alt={ appointment.user?.name || appointment.useradmin?.name }
                   />
 
-                  <strong>{appointment.user?.name}</strong>
+                  <strong>{ appointment.user?.name || appointment.useradmin?.name }</strong>
                 </div>
               </S.Appointment>
             ))}
@@ -201,14 +200,11 @@ const AgendaColab: React.FC = () => {
 
                 <div>
                   <img
-                    src={
-                      
-                      userIcon
-                    }
-                    alt={appointment.user?.name}
+                    src={ appointment.user?.avatar_url|| appointment.useradmin?.avatar_url }
+                    alt={ appointment.user?.name || appointment.useradmin?.name }
                   />
 
-                  <strong>{appointment.user?.name}</strong>
+                  <strong>{ appointment.user?.name || appointment.useradmin?.name }</strong>
                 </div>
               </S.Appointment>
             ))}

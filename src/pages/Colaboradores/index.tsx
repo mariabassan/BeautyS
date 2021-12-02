@@ -55,7 +55,8 @@ return (
         <CardDeck  key={coop._id}>
           <Card className="card" >
             <Card.Img className="card__image" variant="top" 
-            src={coop.avatar || avatarUser}
+            src={`http://localhost:3333/files/${coop.avatar}`}
+            alt={coop.name}
             />
             <Card.Body>
               <Card.Title className="card__title">{coop.name}</Card.Title>

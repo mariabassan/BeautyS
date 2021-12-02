@@ -24,7 +24,11 @@ interface Appointment {
   hourFormatted: string;
   user: {
     name: string;
-    avatar: string;
+    avatar_url: string;
+  };
+  useradmin: {
+    name: string;
+    avatar_url: string;
   };
 }
 
@@ -79,7 +83,7 @@ const Agenda: React.FC = () => {
         setAppointments(appointmentsFormatted);
       });
   }, [selectedDate]);
-
+console.log(appointments);
   const disableDays = useMemo(() => {
     return monthAvailability
       .filter(monthDay => monthDay.available === false)
@@ -136,13 +140,12 @@ const Agenda: React.FC = () => {
               <div>
                 <img
                   src={
-                    nextAppointment.user.avatar ||
-                    userIcon
+                    nextAppointment.user?.avatar_url || nextAppointment.useradmin?.avatar_url
                   }
-                  alt={nextAppointment.user.name}
+                  alt={nextAppointment.user?.name|| nextAppointment.useradmin?.name}
                 />
 
-                <strong>{nextAppointment.user.name}</strong>
+                <strong>{nextAppointment.user?.name || nextAppointment.useradmin?.name}</strong>
                 <span>
                   <FiClock size={24} />
                   {nextAppointment.hourFormatted}
@@ -168,13 +171,13 @@ const Agenda: React.FC = () => {
                 <div>
                   <img
                     src={
-                      appointment.user?.avatar||
-                      userIcon
+                      appointment.user?.avatar_url||
+                      appointment.useradmin?.avatar_url
                     }
-                    alt={appointment.user?.name}
+                    alt={appointment.user?.name || appointment.useradmin?.name}
                   />
 
-                  <strong>{appointment.user?.name}</strong>
+                  <strong>{appointment.user?.name|| appointment.useradmin?.name}</strong>
                 </div>
               </S.Appointment>
             ))}
@@ -195,14 +198,13 @@ const Agenda: React.FC = () => {
 
                 <div>
                   <img
-                    src={
-                      
-                      userIcon
-                    }
-                    alt={appointment.user?.name}
+                    src={ appointment.user?.avatar_url||
+                          appointment.useradmin?.avatar_url
+                        }
+                    alt={appointment.user?.name || appointment.useradmin?.name}
                   />
 
-                  <strong>{appointment.user?.name}</strong>
+                  <strong>{appointment.user?.name || appointment.useradmin?.name}</strong>
                 </div>
               </S.Appointment>
             ))}
