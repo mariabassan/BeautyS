@@ -40,16 +40,16 @@ const AgendaColab: React.FC = () => {
   const routerParams = useLocation().pathname;
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  console.log(routerParams);
   const [monthAvailability, setMonthAvailability] = useState<
     MonthAvailabilityItem[]
   >([]);
 
   const [appointments, setAppointments] = useState<Appointment[]>([]);
-
+  const history = useHistory();
+  //const location = useLocation();
   //const cooperatorId = new URLSearchParams(routerParams);
   //console.log(cooperatorId);
-
+  console.log(routerParams);
   const handleDateChange = useCallback((day: Date, modifiers: DayModifiers) => {
     if (modifiers.available && !modifiers.disabled) {
       setSelectedDate(day);
@@ -62,14 +62,14 @@ const AgendaColab: React.FC = () => {
 
   useEffect(() => {
     api
-      .get(`/providers/${user.id}/month-availability`, {
+      .get(`/providers${routerParams}month-availability`, {
         params: {
           year: currentMonth.getFullYear(),
           month: currentMonth.getMonth() + 1,
         },
       })
       .then(response => setMonthAvailability(response.data));
-  }, [currentMonth, user.id]);
+  }, [currentMonth, routerParams]);
 
   useEffect(() => {
     api
@@ -243,3 +243,4 @@ const AgendaColab: React.FC = () => {
 };
 
 export default AgendaColab;
+//search: `${routerParams}`

@@ -14,7 +14,7 @@ import Button from '../../components/Button';
 
 import { useToast } from '../../hooks/toast';
 import { useAuth } from '../../hooks/auth';
-import { Container, Content, AnimationContainer, AvatarInput} from './styles';
+import { Container, Content, AvatarInput, Section} from './styles';
 
 import userIcon from '../../assets/user2.png'
 import logoImg from '../../assets/logo.png';
@@ -98,12 +98,23 @@ const CadColab: React.FC = () => {
   return (
     <Container>
       <Menu/>
+      <Section>
       <Content>
-        <AnimationContainer>
-          <img src={logoImg} alt="BeautyS" />
-
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Cadastro de colaboradores</h1>
+
+            <AvatarInput>
+            <img
+              src={
+                userIcon
+              }
+              alt={"FOTO"}
+            />
+            <label htmlFor="avatar">
+              <FiCamera size={20} />
+              <input type="file" id="avatar" onChange={handleAvatarChange} />
+            </label>
+            </AvatarInput>
 
             <Input name="nome" icon={FiType} placeholder="Nome Completo" />
             <Input name="email" icon={FiType} placeholder="E-Mail" />
@@ -116,20 +127,6 @@ const CadColab: React.FC = () => {
             <Input name="phone" icon={TiSortNumerically} placeholder="Telefone" />
             <Input name="procedure" icon={FiType} placeholder="Procedimento principal" />
 
-            <AvatarInput>
-            <img
-              src={
-                
-                userIcon
-              }
-              alt={user.name}
-            />
-            <label htmlFor="avatar">
-              <FiCamera size={20} />
-              <input type="file" id="avatar" onChange={handleAvatarChange} />
-            </label>
-            </AvatarInput>
-
             <Button type="submit">Salvar</Button>
           </Form>
 
@@ -138,9 +135,8 @@ const CadColab: React.FC = () => {
             Cancelar
           </Link>
 
-        </AnimationContainer>
       </Content>
-
+      </Section>
     </Container>
   );
 };

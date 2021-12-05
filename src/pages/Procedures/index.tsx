@@ -39,7 +39,7 @@ return (
 
       <S.CardProc className="wrapper">
         <CardDeck >
-          <Card.Link className="card" href="/dashboard">
+          <Card.Link className="card" href="/cadprocedures">
             <Card.Img className="card__image" src={addProcedure}/>
           </Card.Link>
         </CardDeck>

@@ -47,7 +47,7 @@ return (
 
       <S.CardColab className="wrapper">
         <CardDeck >
-          <Card.Link className="card" href="/dashboard">
+          <Card.Link className="card" href="/cadcolaborador">
             <Card.Img className="card__image" src={addColaborador}/>
           </Card.Link>
         </CardDeck>
@@ -65,7 +65,7 @@ return (
               </Card.Text>
             </Card.Body>
             <Card.Footer>
-            <button className="card__btn" type="button" onClick={() => {
+              <button className="card__btn" type="button" onClick={() => {
                 history.push(`/${coop.id}/`);
                 //console.log(history);
                 }}>
@@ -84,17 +84,3 @@ return (
 }
 
 export default Colaboradores;
-//<button className="card__btn" type="button" key={coop._id} onClick={event =>  window.location.href='/agenda'}>Acessar agenda</button>
-//<Link to={'/agendaColab/' + coop._id} className='card__btn'>Acessar agenda</Link> 
-//<Link to='/agendaColab?q=coop._id'> </Link>
-
-/*<button className="card__btn" type="button" onClick={() => {
-                history.push(`/agendaColab/${coop.id}`);
-                console.log(history);
-                }}>
-                Acessar agenda
-              </button>*/
-/*history.push({
-                  pathname: `/agendaColab/${coop.id}`,
-                  //search: ``,
-                });*/

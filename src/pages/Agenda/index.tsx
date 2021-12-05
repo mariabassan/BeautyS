@@ -13,6 +13,8 @@ import api from '../../services/api';
 import Menu from '../../components/menu/Navbar';
 import userIcon from '../../assets/user2.png'
 
+import { useHistory } from 'react-router-dom';
+
 interface MonthAvailabilityItem {
   day: number;
   available: boolean;
@@ -34,7 +36,7 @@ interface Appointment {
 
 const Agenda: React.FC = () => {
   const { user } = useAuth();
-
+  const history = useHistory();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
@@ -238,6 +240,10 @@ console.log(appointments);
           />
         </S.Calendar>
       </S.Content>
+      <button className="button" type="button" onClick={() => {
+        history.push(`/add`);}}>
+        NOVO AGENDAMENTO
+      </button>
     </S.Container>
   );
 };

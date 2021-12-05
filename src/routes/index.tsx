@@ -14,6 +14,8 @@ import DashAlt from '../pages/Dashboard2';
 import Dash from '../pages/Dashboard3';
 import Procedure from '../pages/Procedures';
 import AgendaColab from '../pages/AgendaColab';
+import AddAppointment from '../pages/AddAppointment';
+import CadProcedure from '../pages/CadProcedure';
 
 import Route from './Route';
 
@@ -28,11 +30,13 @@ const Routes: React.FC = () => (
     <Route path="/colaboradores" component={Colaboradores} isPrivate />
     <Route path="/cadcolaborador" component={CadColab}isPrivate/>
     <Route path="/procedures" component={Procedure} isPrivate />
+    <Route path="/cadprocedures" component={CadProcedure} isPrivate />
     <Route path="/agenda" component={Agenda} isPrivate />
     <Route path="/dashboardAlt" component={DashAlt} isPrivate />
     <Route path="/dashboard" component={Dash} isPrivate />
     <Route path="/profile" component={Profile} isPrivate />
     <Route path="/:cooperatorId" component={AgendaColab} isPrivate />
+    <Route path="/add" component={AddAppointment} isPrivate />
   </Switch>
 );
 

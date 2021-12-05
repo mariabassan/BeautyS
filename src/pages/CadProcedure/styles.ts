@@ -1,9 +1,10 @@
 import styled, { keyframes } from 'styled-components';
-import { shade } from 'polished';
+import { shade, lighten } from 'polished';
 
 export const Container = styled.div``;
 
 export const Content = styled.div`
+
 margin-top: 150px;
 .wrapper {
   display: grid;
