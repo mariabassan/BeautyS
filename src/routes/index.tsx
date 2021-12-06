@@ -10,7 +10,7 @@ import Profile from '../pages/Profile';
 import CadEstab from '../pages/CadEstab';
 import Colaboradores from '../pages/Colaboradores';
 import CadColab from '../pages/CadColab';
-import DashAlt from '../pages/Dashboard2';
+import Relatorios from '../pages/Dashboard2';
 import Dash from '../pages/Dashboard3';
 import Procedure from '../pages/Procedures';
 import AgendaColab from '../pages/AgendaColab';
@@ -32,7 +32,7 @@ const Routes: React.FC = () => (
     <Route path="/procedures" component={Procedure} isPrivate />
     <Route path="/cadprocedures" component={CadProcedure} isPrivate />
     <Route path="/agenda" component={Agenda} isPrivate />
-    <Route path="/dashboardAlt" component={DashAlt} isPrivate />
+    <Route path="/relatorios" component={Relatorios} isPrivate />
     <Route path="/dashboard" component={Dash} isPrivate />
     <Route path="/profile" component={Profile} isPrivate />
     <Route path="/:cooperatorId" component={AgendaColab} isPrivate />

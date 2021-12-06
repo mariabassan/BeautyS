@@ -57,7 +57,7 @@ function RightNav(props: Props) {
             </li>
             <li>
             <button className="button-menu" type="button" onClick={() => {
-                history.push(`/dashboardAlt`);}}>
+                history.push(`/relatorios`);}}>
                   RELATORIOS
             </button>
             </li>
