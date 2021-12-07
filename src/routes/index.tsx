@@ -14,8 +14,9 @@ import Relatorios from '../pages/Dashboard2';
 import Dash from '../pages/Dashboard3';
 import Procedure from '../pages/Procedures';
 import AgendaColab from '../pages/AgendaColab';
-import AddAppointment from '../pages/AddAppointment';
+import AddAppoinment from '../pages/AddAppointment';
 import CadProcedure from '../pages/CadProcedure';
+import AppointmentDatePicker from '../pages/AppointmentDatePicker';
 
 import Route from './Route';
 
@@ -36,7 +37,7 @@ const Routes: React.FC = () => (
     <Route path="/dashboard" component={Dash} isPrivate />
     <Route path="/profile" component={Profile} isPrivate />
     <Route path="/:cooperatorId" component={AgendaColab} isPrivate />
-    <Route path="/add" component={AddAppointment} isPrivate />
+    <Route path="/add" component={AddAppoinment} isPrivate />
   </Switch>
 );
 

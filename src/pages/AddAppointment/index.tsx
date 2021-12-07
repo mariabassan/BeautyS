@@ -12,27 +12,32 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import { useToast } from '../../hooks/toast';
+import { useAuth } from '../../hooks/auth';
 
-import { Container, Content, AvatarInput } from './styles';
+import { Container, Content, AvatarInput, Section } from '../CadColab/styles';
+import userIcon from '../../assets/user2.png'
 
-interface ProfileFormData {
+interface AppointmentFormData {
   cooperator: string;
-  date: string;
+  date: Date;
+  user_id: string;
+  procedure_id: string;
 }
 
-interface Cooperator {
+/*interface Cooperator {
     id: string;
     name: string;
     procedure: string;
     avatar: string;
-}
+}*/
 
 const AddAppoinment: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
+  const { user } = useAuth();
 
-  const [cooperator, setCooperator] = useState<Cooperator[]>([]);
+  /*const [cooperator, setCooperator] = useState<Cooperator[]>([]);
   const [ loading, setLoading ] = useState(true);
 
   useEffect(() => {
@@ -44,36 +49,41 @@ const AddAppoinment: React.FC = () => {
       loadCooperator();
     },[])
 
-  const validCoop = cooperator.map(({ id }) => id);
+  const idCoop = cooperator.map((coop) => coop.id);
+  const nameCoop = cooperator.map((coop) => coop.name);
+  const procedureCoop = cooperator.map((coop) => coop.procedure);*/
 
-  const handleSubmit = useCallback(
-    async (data: ProfileFormData) => {
+    const handleSubmit = useCallback(
+    async (data: AppointmentFormData) => {
       try {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          cooperator: Yup.string()
-          .required("Selecione um colaborador")
-          .oneOf(validCoop),  
-          date: Yup.string().required('Horáro obrigatório'),
+          cooperator: Yup.string().required("Selecione um colaborador").oneOf(nameCoop),  
+          date: Yup.date().required('Horáro obrigatório'),
+          procedure_id: Yup.string().required("Selecione um colaborador").oneOf(procedureCoop),
         });
 
         await schema.validate(data, { abortEarly: false });
 
-        const {
+        /*const {
           cooperator,
-          date
+          date,
+          user_id,
+          procedure_id
         } = data;
 
         const formData = {
             cooperator,
-            date
-        };
+            date,
+            user_id: user.id,
+            procedure_id: procedureCoop,
+        };*/
 
-        const response = await api.post('/appointments', formData);
-        console.log(response);
+        await api.post('/appointments', data);
+        console.log(data);
 
-        history.push('/agenda');
+        history.push('/');
 
         addToast({
           type: 'success',
@@ -97,20 +107,60 @@ const AddAppoinment: React.FC = () => {
         });
       }
     },
-    [addToast],
+    [addToast, history],
   );
 
-  const coopOptions = cooperator.map((coop) => (
+  /*const coopOptions = cooperator.map((coop) => (
     <option value={coop.name} key={coop.id}>
       {coop.name}
     </option>
-  ));
+  ));*/
+
+  const nameCoop = ['Mariana', 'Clarice', 'Angela', 'Beto Morais', 'Flavio Morais'];
+  const procedureCoop = ['Corte', 'Manicure', 'Cabelo', 'Sobrancelha', 'Barba'];
 
   return (
     <Container>
       <header>
         <div>
           <Link to="/agenda">
+            <FiArrowLeft size={32} />
+          </Link>
+        </div>
+      </header>
+      <Section>
+      <Content>
+        <Form ref={formRef} onSubmit={handleSubmit}>
+          <AvatarInput>
+            <img
+              src={userIcon}
+              alt={'FOTO'}
+            />
+          </AvatarInput>
+          <h1>Novo agendamento</h1>
+
+          <Input name="cooperator" icon={FiUser} placeholder="Colaborador">
+          <option value={nameCoop}>Selecione o colaborador</option>
+          </Input>
+
+          <Input name="date" icon={FiCalendar} placeholder="Data" />
+
+          <Input name="procedure_id" icon={FiUser} placeholder="Procedimento">
+          <option value={procedureCoop}>Selecione o procedimento</option>
+          </Input>
+          <Button type="submit">Confirmar alterações</Button>
+        </Form>
+      </Content>
+      </Section>
+    </Container>
+  );
+};
+
+export default AddAppoinment;
+/*<Container>
+      <header>
+        <div>
+          <Link to="">
             <FiArrowLeft size={32} />
           </Link>
         </div>
@@ -140,8 +190,5 @@ const AddAppoinment: React.FC = () => {
           <Button type="submit">Confirmar alterações</Button>
         </Form>
       </Content>
-    </Container>
-  );
-};
-
-export default AddAppoinment;
+      </Section>
+    </Container>*/

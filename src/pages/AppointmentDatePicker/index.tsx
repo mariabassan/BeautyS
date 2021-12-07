@@ -142,7 +142,7 @@ const AppointmentDatePicker: React.FC = () => {
       });
     }
 
-    history.push('/agenda');
+    history.push('');
 
   }, [Params, selectedDate, selectedHour, history, addToast]);
 

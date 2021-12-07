@@ -240,12 +240,17 @@ console.log(appointments);
           />
         </S.Calendar>
       </S.Content>
-      <button className="button" type="button" onClick={() => {
-        history.push(`/add`);}}>
-        NOVO AGENDAMENTO
-      </button>
+      
     </S.Container>
   );
 };
 
 export default Agenda;
+/*<button className="button" type="button" onClick={() => {
+        history.push(`/add`);}}>
+        NOVO AGENDAMENTO
+      </button>
+      <button className="button" type="button" onClick={() => {
+        history.push(`/agendar`);}}>
+        NOVO AGENDAMENTO2
+      </button>*/
