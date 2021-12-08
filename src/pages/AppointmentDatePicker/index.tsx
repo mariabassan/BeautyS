@@ -1,15 +1,12 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
-//---
 import { format } from 'date-fns';
-import DateTimePicker from '@react-native-community/datetimepicker';
+//import DateTimePicker from '@react-native-community/datetimepicker';
 //import DateTimePicker from 'react-datetime-picker';
-//---
-import { useRoute, useNavigation } from '@react-navigation/native';
-import { useHistory } from 'react-router-dom';
-//import { Alert } from 'react-native';
+import DatePicker from 'react-date-picker';
+//import { useRoute, useNavigation, Link } from '@react-navigation/native';
+import { useHistory, useParams } from 'react-router-dom';
 import { useToast } from '../../hooks/toast';
-//---
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
 import {
@@ -53,14 +50,17 @@ interface AvailabilityItem {
 
 const AppointmentDatePicker: React.FC = () => {
   const { user } = useAuth();
-  const route = useRoute();
-  const navigation = useNavigation();
-  const params = route.params as RouteParams;
+  //const route = useRoute();
+  //const navigation = useNavigation();
+  //const params = route.params as RouteParams;
+  const { cooperatorId } = useParams() as RouteParams;
   const { addToast } = useToast();
   const history = useHistory();
 
+  console.log(cooperatorId);
+
   const [selectedProvider, setSelectedProvider] = useState<string>(
-    params.cooperatorId,
+    cooperatorId,
   );
 
   const minimumDate = useMemo(() => {
@@ -80,25 +80,35 @@ const AppointmentDatePicker: React.FC = () => {
   const [availability, setAvailability] = useState<AvailabilityItem[]>([]);
   const procedure = ['Corte', 'Manicure', 'Cabelo', 'Sobrancelha', 'Barba'];
 
+/*async function loadCooperator(){
+      const response = await api.get("/cooperator");
+      setCooperator(response.data)
+      setLoading(false);
+      }
+      loadCooperator();
+    },[])*/
+
   useEffect(() => {
-    api.get('cooperator').then((response) => {
+    async function loadCooperator(){
+      const response = await api.get('cooperator');
       setProviders(response.data);
-    });
+    }
+    loadCooperator();
   }, []);
 
   useEffect(() => {
-    api
-      .get(`/providers/${selectedProvider}/day-availability`, {
+    async function loadDay(){
+      const response = await api.get(`/providers/${selectedProvider}/day-availability`, {
         params: {
           year: selectedDate.getFullYear(),
           month: selectedDate.getMonth() + 1,
           day: selectedDate.getDate(),
         },
-      })
-      .then((response) => {
+      });
         setAvailability(response.data);
         setSelectedHour(0);
-      });
+      }
+      loadDay()
   }, [selectedProvider, selectedDate]);
 
   const handleSelectProvider = useCallback((cooperatorId: string) => {
@@ -125,7 +135,8 @@ const AppointmentDatePicker: React.FC = () => {
         description:
           'Seu agendamento foi realizado com sucesso.',
       });
-      //navigation.navigate('AppointmentCreated', { date: date.getTime() });
+
+      //navigation.navigate('/colaboradores', { date: date.getTime() });
     } catch (err) {
         addToast({
             type: 'error',
@@ -134,7 +145,7 @@ const AppointmentDatePicker: React.FC = () => {
               'Ocorreu um erro ao tentar criar o agendamento, tente novamente!',
           });
     }
-  }, [selectedProvider, selectedDate, selectedHour, navigation]);
+  }, [selectedProvider, selectedDate, selectedHour]);
 
   const morningAvailability = useMemo(() => {
     return availability
@@ -208,13 +219,10 @@ const AppointmentDatePicker: React.FC = () => {
         <Calendar>
           <Title>Escolha a data</Title>
 
-          <DateTimePicker
-            mode="date"
-            is24Hour
-            display="calendar"
+          <DatePicker
             value={selectedDate}
-            onChange={(_, date) => date && setSelectedDate(date)}
-            minimumDate={minimumDate}
+            onChange={(date: Date) => setSelectedDate(date)}
+            minDate={minimumDate}
           />
         </Calendar>
 

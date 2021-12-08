@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useCallback} from 'react';
 import 'react-day-picker/lib/style.css';
 
 import Card from 'react-bootstrap/Card';
@@ -8,10 +8,9 @@ import { useHistory } from 'react-router-dom';
 import * as S from './styles';
 
 import api from '../../services/api';
-
-import avatarUser from '../../assets/profile-user.png';
-import addColaborador from '../../assets/addcolaborador.png';
 import Menu from '../../components/menu/Navbar';
+
+import addColaborador from '../../assets/addcolaborador.png';
 
 interface Cooperator {
   id: string;
@@ -21,7 +20,6 @@ interface Cooperator {
 }
 
 const Colaboradores: React.FC = () => {
-
 	const [cooperator, setCooperator] = useState<any[]>([]);
   const [ loading, setLoading ] = useState(true);
 
@@ -73,9 +71,8 @@ return (
               </button>
               <button className="card__btn" type="button" onClick={() => {
                 history.push(`/addappointment/${coop.id}/`);
-                //console.log(history);
                 }}>
-                Acessar agenda
+                Criar agendamento
               </button>
             </Card.Footer>
           </Card>
@@ -90,3 +87,9 @@ return (
 }
 
 export default Colaboradores;
+
+/*type="button" onClick={() => navigation.navigate(`/addappointment/${coop.id}/`)}
+{
+    history.push(`/addappointment/${coop.id}/`);
+    //console.log(history);
+  }*/

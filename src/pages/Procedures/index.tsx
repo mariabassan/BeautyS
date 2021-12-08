@@ -33,7 +33,7 @@ return (
 <S.Container>
   <Menu/>
   <S.Section>
-    <S.DivTitle><strong>Serviços</strong></ S.DivTitle>
+    <S.DivTitle><strong>Procedimentos</strong></ S.DivTitle>
 
       <S.Content>
 
