@@ -4,10 +4,11 @@ import { animated } from 'react-spring';
 /*import {
   getStatusBarHeight,
   getBottomSpace,
-} from 'react-native-iphone-x-helper';
+} from 'react-native-iphone-x-helper';*/
 import { FlatList } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-import { Provider } from '.';*/
+import { Cooperator } from '../AppointmentDatePicker/index';
+//import FlatList from 'flatlist-react';
 
 interface ProviderContainerProps {
   selected: boolean;
@@ -56,7 +57,27 @@ export const ProvidersListContainer = styled.div`
   height: 112px;
 `;
 
-export const ProvidersList = styled.div``;
+export const ProvidersList = styled(
+  FlatList as new () => FlatList<Cooperator>,
+).attrs({
+  horizontal: true,
+  showsHorizontalScrollIndicator: false,
+  contentContainerStyle: {
+    paddingVertical: 32,
+    paddingHorizontal: 24,
+  },
+})``;
+
+export const PrecedureList = styled(
+  FlatList as new () => FlatList<any>,
+).attrs({
+  horizontal: true,
+  showsHorizontalScrollIndicator: false,
+  contentContainerStyle: {
+    paddingVertical: 32,
+    paddingHorizontal: 24,
+  },
+})``;
 
 export const ProviderContainer = styled(animated.div)<ProviderContainerProps>`
   flex-direction: row;
@@ -108,7 +129,7 @@ export const SectionTitle = styled.text`
 
 export const SectionContent = styled.section``;
 
-export const Hour = styled(animated.div).attrs((props: HourProps) => ({
+export const Hour = styled.button.attrs((props: HourProps) => ({
   enabled: props.available,
 }))<HourProps>`
   padding: 12px;
@@ -124,7 +145,7 @@ export const HourText = styled.text<HourTextProps>`
   font-size: 18px;
 `;
 
-export const CreateAppointmentButton = styled(animated.div)`
+export const CreateAppointmentButton = styled.button`
   background: #ff9000;
   border-radius: 10px;
   height: 50px;

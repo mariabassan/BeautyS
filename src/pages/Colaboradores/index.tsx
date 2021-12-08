@@ -71,6 +71,12 @@ return (
                 }}>
                 Acessar agenda
               </button>
+              <button className="card__btn" type="button" onClick={() => {
+                history.push(`/addappointment/${coop.id}/`);
+                //console.log(history);
+                }}>
+                Acessar agenda
+              </button>
             </Card.Footer>
           </Card>
         </CardDeck>

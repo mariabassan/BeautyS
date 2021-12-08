@@ -29,6 +29,7 @@ const Routes: React.FC = () => (
     <Route path="/cad-estab" component={CadEstab} isPrivate/>
 
     <Route path="/colaboradores" component={Colaboradores} isPrivate />
+    <Route path="/addappointment/:cooperatorId" component={AppointmentDatePicker} isPrivate />
     <Route path="/cadcolaborador" component={CadColab}isPrivate/>
     <Route path="/procedures" component={Procedure} isPrivate />
     <Route path="/cadprocedures" component={CadProcedure} isPrivate />

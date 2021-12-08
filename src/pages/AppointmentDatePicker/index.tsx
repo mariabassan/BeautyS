@@ -1,20 +1,17 @@
-import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-
-import DateTimePicker from 'react-datetime-picker';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { FiArrowLeft } from 'react-icons/fi';
+//---
 import { format } from 'date-fns';
-//import ptBR from 'date-fns/locale/pt-BR';
-
+import DateTimePicker from '@react-native-community/datetimepicker';
+//import DateTimePicker from 'react-datetime-picker';
+//---
+import { useRoute, useNavigation } from '@react-navigation/native';
+import { useHistory } from 'react-router-dom';
+//import { Alert } from 'react-native';
+import { useToast } from '../../hooks/toast';
+//---
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
-
-import { useToast } from '../../hooks/toast';
-import { useHistory, useLocation, Link } from 'react-router-dom';
-import getValidationErrors from '../../utils/getValidationErrors';
-import { FormHandles } from '@unform/core';
-import * as Yup from 'yup';
-import { FiArrowLeft } from 'react-icons/fi';
-import queryString from 'query-string';
-
 import {
   Container,
   Header,
@@ -35,14 +32,19 @@ import {
   HourText,
   CreateAppointmentButton,
   CreateAppointmentButtonText,
+  PrecedureList,
 } from './styles';
 
-interface Cooperator {
-    id: string;
-    name: string;
-    procedure: string;
-    avatar: string;
-  }
+export interface Cooperator {
+  id: string;
+  name: string;
+  procedure: string;
+  avatar_url: string;
+}
+
+interface RouteParams {
+  cooperatorId: string;
+}
 
 interface AvailabilityItem {
   hour: number;
@@ -51,20 +53,14 @@ interface AvailabilityItem {
 
 const AppointmentDatePicker: React.FC = () => {
   const { user } = useAuth();
+  const route = useRoute();
+  const navigation = useNavigation();
+  const params = route.params as RouteParams;
+  const { addToast } = useToast();
   const history = useHistory();
 
-  //const routerParams = useLocation().pathname;
-  const Params = queryString.stringify(queryString.parse(useLocation().search));
-
-  console.log(Params);
-  
-  const formRef = useRef<FormHandles>(null);
-  const { addToast } = useToast();
-
-  //const cooperatorId = new URLSearchParams(Params);
-
-  const [selectedProvider, setSelectedProvider] = useState<String>(
-    Params,
+  const [selectedProvider, setSelectedProvider] = useState<string>(
+    params.cooperatorId,
   );
 
   const minimumDate = useMemo(() => {
@@ -80,18 +76,19 @@ const AppointmentDatePicker: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(minimumDate);
   const [selectedHour, setSelectedHour] = useState(0);
 
-  const [cooperator, setCooperator] = useState<Cooperator[]>([]);
+  const [providers, setProviders] = useState<Cooperator[]>([]);
   const [availability, setAvailability] = useState<AvailabilityItem[]>([]);
+  const procedure = ['Corte', 'Manicure', 'Cabelo', 'Sobrancelha', 'Barba'];
 
   useEffect(() => {
-    api.get('/cooperator').then((response) => {
-        setCooperator(response.data);
+    api.get('cooperator').then((response) => {
+      setProviders(response.data);
     });
   }, []);
 
   useEffect(() => {
     api
-      .get(`/providers/${Params}/day-availability`, {
+      .get(`/providers/${selectedProvider}/day-availability`, {
         params: {
           year: selectedDate.getFullYear(),
           month: selectedDate.getMonth() + 1,
@@ -102,10 +99,10 @@ const AppointmentDatePicker: React.FC = () => {
         setAvailability(response.data);
         setSelectedHour(0);
       });
-  }, [Params, selectedDate]);
+  }, [selectedProvider, selectedDate]);
 
-  const handleSelectProvider = useCallback((Params: string) => {
-    setSelectedProvider(Params);
+  const handleSelectProvider = useCallback((cooperatorId: string) => {
+    setSelectedProvider(cooperatorId);
   }, []);
 
   const handleCreateAppointment = useCallback(async () => {
@@ -117,6 +114,8 @@ const AppointmentDatePicker: React.FC = () => {
 
       await api.post('appointments', {
         cooperator_id: selectedProvider,
+        user_id: user.id,
+        procedure_id: procedure,
         date,
       });
 
@@ -126,25 +125,16 @@ const AppointmentDatePicker: React.FC = () => {
         description:
           'Seu agendamento foi realizado com sucesso.',
       });
+      //navigation.navigate('AppointmentCreated', { date: date.getTime() });
     } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(err);
-
-        formRef.current?.setErrors(errors);
-        return;
-      }
-
-      addToast({
-        type: 'error',
-        title: 'Erro ao criar agendamento',
-        description:
-          'Ocorreu um erro ao tentar criar o agendamento, tente novamente!',
-      });
+        addToast({
+            type: 'error',
+            title: 'Erro ao criar agendamento',
+            description:
+              'Ocorreu um erro ao tentar criar o agendamento, tente novamente!',
+          });
     }
-
-    history.push('');
-
-  }, [Params, selectedDate, selectedHour, history, addToast]);
+  }, [selectedProvider, selectedDate, selectedHour, navigation]);
 
   const morningAvailability = useMemo(() => {
     return availability
@@ -169,47 +159,62 @@ const AppointmentDatePicker: React.FC = () => {
   return (
     <>
       <Header>
-        <Link to="/agenda">
-            <FiArrowLeft size={32} />
-        </Link>
-        <HeaderTitle>Novo agendamento</HeaderTitle>
-
+        <button type="button" onClick={() => history.goBack()}>
+          <FiArrowLeft name="chevron-left" size={24} color="#999591" />
+        </button>
+        <HeaderTitle>Cabelereiros</HeaderTitle>
 
         <UserAvatar><img
             src={user.avatar_url}
-            alt={user.name}
-          /> 
+            alt={user.name}/> 
         </UserAvatar>
       </Header>
       <Container>
-        <ProvidersListContainer>
-        {cooperator.map((coop) => (
-          <ProvidersList key={coop.id}>
-              <ProviderContainer selected={coop.id === selectedProvider}>
-                onClick={() => handleSelectProvider(coop.id)}
-              <ProviderAvatar>
-                <img
-                  src={`http://localhost:3333/files/${coop.avatar}`}
-                  alt={coop.name}
-                />
-              </ProviderAvatar>
-              <ProviderName selected={coop.id === selectedProvider}>
-                {coop.name}
-              </ProviderName>
+        <ProvidersListContainer style={{ flex: 1, flexDirection: 'row' }}>
+          <ProvidersList
+            data={providers}
+            keyExtractor={(provider) => provider.id}
+            renderItem={({ item: provider }) => (
+              <ProviderContainer
+                selected={provider.id === selectedProvider}
+                onClick={() => handleSelectProvider(provider.id)}
+              >
+                <ProviderAvatar><img
+                    src={user.avatar_url}
+                    alt={user.name}/>
+                </ProviderAvatar>
+                <ProviderName selected={provider.id === selectedProvider}>
+                  {provider.name}
+                </ProviderName>
               </ProviderContainer>
-          </ProvidersList>
-        ))}
+            )}
+          />
+          <PrecedureList
+            data={procedure}
+            //keyExtractor={(provider) => provider.id}
+            renderItem={({ item: procedure }) => (
+              <ProviderContainer
+                selected={procedure}
+                onClick={() => (procedure)}
+              >
+                <ProviderName selected={procedure}>
+                  {procedure}
+                </ProviderName>
+              </ProviderContainer>
+            )}
+          />
         </ProvidersListContainer>
 
         <Calendar>
           <Title>Escolha a data</Title>
 
           <DateTimePicker
-            name="date"
-            format="dd-MM-y HH:mm"
+            mode="date"
+            is24Hour
+            display="calendar"
             value={selectedDate}
-            onChange={(date) => setSelectedDate(date)}
-            maxDate={minimumDate}
+            onChange={(_, date) => date && setSelectedDate(date)}
+            minimumDate={minimumDate}
           />
         </Calendar>
 
