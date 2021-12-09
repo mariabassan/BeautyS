@@ -54,7 +54,7 @@ return (
               </Card.Text>
             </Card.Body>
             <Card.Footer>
-              <button className="card__btn" type="button">Editar</button>
+              
             </Card.Footer>
           </Card>
         </CardDeck>
@@ -68,3 +68,5 @@ return (
 }
 
 export default Procedure;
+
+//<button className="card__btn" type="button">Editar</button>

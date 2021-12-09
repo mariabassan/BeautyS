@@ -103,10 +103,10 @@ const CadEstab: React.FC = () => {
             <Input name="cidade" icon={TiWorld} placeholder="Cidade" />
             <Input name="estado" icon={TiWorld} placeholder="UF" />
 
-            <Button type="submit">Cadastrar</Button>
+            <Button type="submit">Cadastrar<Link to="/"></Link></Button>
           </Form>
 
-          <Link to="/dashboard">
+          <Link to="/">
             <FiArrowLeft />
             Voltar para login
           </Link>

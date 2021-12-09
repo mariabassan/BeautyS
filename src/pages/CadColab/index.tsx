@@ -21,18 +21,18 @@ import logoImg from '../../assets/logo.png';
 import Menu from '../../components/menu/Navbar';
 
 interface CadColabFormData {
-  nome: string;
+  name: string;
   email: string;
   password: string;
   phone: string;
-  procedure: string;
+  procedure_id: string;
 }
 
 const CadColab: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
-  const { user } = useAuth();
+  //const { user } = useAuth();
 
   const handleSubmit = useCallback(
     async (data: CadColabFormData) => {
@@ -40,17 +40,18 @@ const CadColab: React.FC = () => {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          nome: Yup.string().required('Nome é obrigatório'),
+          name: Yup.string().required('Nome é obrigatório'),
           email: Yup.string().required('E-mail é obrigatório'),
           password: Yup.string().min(6, 'No mínimo 6 dígitos'),
           phone: Yup.string().required('Telefone é obrigatório'),
-          procedure: Yup.string(),
+          procedure_id: Yup.string(),
+          estab_id: Yup.string(),
         });
 
         await schema.validate(data, { abortEarly: false });
 
         await api.post('/cooperator', data);
-
+        console.log(data);
         history.push('/colaboradores');
 
         addToast({
@@ -65,12 +66,17 @@ const CadColab: React.FC = () => {
           formRef.current?.setErrors(errors);
           return;
         }
-
+        /*addToast({
+          type: 'success',
+          title: 'Cadastro do colaborador realizado!',
+          description: 'BeautyScheduler!',
+        })*/
         addToast({
           type: 'error',
           title: 'Erro no cadastro do colaborador',
           description: 'Ocorreu um erro ao realizar o cadastro, tente novamente.',
         });
+        //history.push('/dashboard');
       }
     },
     [addToast, history],
@@ -83,7 +89,7 @@ const CadColab: React.FC = () => {
 
         data.append('avatar', e.target.files[0]);
 
-        api.patch('/cooperator/avatar', data).then(response => {
+        api.patch('/cooperator/avatar', data).then((response: any) => {
 
           addToast({
             type: 'success',
@@ -104,19 +110,13 @@ const CadColab: React.FC = () => {
             <h1>Cadastro de colaboradores</h1>
 
             <AvatarInput>
-            <img
-              src={
-                userIcon
-              }
-              alt={"FOTO"}
-            />
             <label htmlFor="avatar">
               <FiCamera size={20} />
               <input type="file" id="avatar" onChange={handleAvatarChange} />
             </label>
             </AvatarInput>
 
-            <Input name="nome" icon={FiType} placeholder="Nome Completo" />
+            <Input name="name" icon={FiType} placeholder="Nome Completo" />
             <Input name="email" icon={FiType} placeholder="E-Mail" />
             <Input
               name="password"
@@ -125,9 +125,10 @@ const CadColab: React.FC = () => {
               placeholder="Senha"
             />
             <Input name="phone" icon={TiSortNumerically} placeholder="Telefone" />
-            <Input name="procedure" icon={FiType} placeholder="Procedimento principal" />
+            <Input name="procedure_id" icon={FiType} placeholder="Procedimento principal" />
+            <Input name="estab_id" icon={FiType} placeholder="Estabelecimento" />
 
-            <Button type="submit">Salvar</Button>
+            <Button type="submit">Salvar<Link to="/colaboradores"></Link></Button>
           </Form>
 
           <Link to="/colaboradores">
@@ -142,3 +143,9 @@ const CadColab: React.FC = () => {
 };
 
 export default CadColab;
+/*<img
+  src={
+    userIcon
+  }
+  alt={"FOTO"}
+  />*/

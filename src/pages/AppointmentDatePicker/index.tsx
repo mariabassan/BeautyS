@@ -9,11 +9,10 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useToast } from '../../hooks/toast';
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
+import Menu from '../../components/menu/Navbar';
 import {
   Container,
-  Header,
   HeaderTitle,
-  UserAvatar,
   ProvidersListContainer,
   ProvidersList,
   ProviderContainer,
@@ -29,19 +28,20 @@ import {
   HourText,
   CreateAppointmentButton,
   CreateAppointmentButtonText,
-  PrecedureList,
+  Content,
 } from './styles';
 
 export interface Cooperator {
   id: string;
   name: string;
-  procedure: string;
+  procedure_id: string;
   avatar_url: string;
 }
 
 interface RouteParams {
   cooperatorId: string;
 }
+
 
 interface AvailabilityItem {
   hour: number;
@@ -50,14 +50,11 @@ interface AvailabilityItem {
 
 const AppointmentDatePicker: React.FC = () => {
   const { user } = useAuth();
-  //const route = useRoute();
-  //const navigation = useNavigation();
-  //const params = route.params as RouteParams;
   const { cooperatorId } = useParams() as RouteParams;
   const { addToast } = useToast();
   const history = useHistory();
 
-  console.log(cooperatorId);
+  //console.log(cooperatorId);
 
   const [selectedProvider, setSelectedProvider] = useState<string>(
     cooperatorId,
@@ -78,7 +75,7 @@ const AppointmentDatePicker: React.FC = () => {
 
   const [providers, setProviders] = useState<Cooperator[]>([]);
   const [availability, setAvailability] = useState<AvailabilityItem[]>([]);
-  const procedure = ['Corte', 'Manicure', 'Cabelo', 'Sobrancelha', 'Barba'];
+  //const procedure = ['Corte', 'Manicure', 'Cabelo', 'Sobrancelha', 'Barba'];
 
 /*async function loadCooperator(){
       const response = await api.get("/cooperator");
@@ -90,11 +87,19 @@ const AppointmentDatePicker: React.FC = () => {
 
   useEffect(() => {
     async function loadCooperator(){
-      const response = await api.get('cooperator');
+      const response = await api.get(`cooperator`);
       setProviders(response.data);
     }
     loadCooperator();
   }, []);
+
+  //console.log(providers[0]?.procedure_id);
+  //console.log(providers.map((prov) => (prov.procedure_id)));
+  //console.log(providers.filter(prov => prov.id === selectedProvider).map((prov) => (prov.procedure_id)));
+
+  const procedure = providers.filter(prov => prov.id === selectedProvider).map((prov) => (prov.procedure_id));
+
+  console.log(String(procedure));
 
   useEffect(() => {
     async function loadDay(){
@@ -125,7 +130,7 @@ const AppointmentDatePicker: React.FC = () => {
       await api.post('appointments', {
         cooperator_id: selectedProvider,
         user_id: user.id,
-        procedure_id: procedure,
+        procedure_id: String(procedure),
         date,
       });
 
@@ -136,7 +141,7 @@ const AppointmentDatePicker: React.FC = () => {
           'Seu agendamento foi realizado com sucesso.',
       });
 
-      //navigation.navigate('/colaboradores', { date: date.getTime() });
+      history.push(`/${selectedProvider}`, { date: date.getTime() });
     } catch (err) {
         addToast({
             type: 'error',
@@ -144,8 +149,15 @@ const AppointmentDatePicker: React.FC = () => {
             description:
               'Ocorreu um erro ao tentar criar o agendamento, tente novamente!',
           });
+          /*addToast({
+            type: 'success',
+            title: 'Agendamento concluído!',
+            description:
+              'Seu agendamento foi realizado com sucesso.',
+          });
+          history.push(`/${selectedProvider}`);*/
     }
-  }, [selectedProvider, selectedDate, selectedHour]);
+  }, [selectedProvider, selectedDate, selectedHour, history, addToast]);
 
   const morningAvailability = useMemo(() => {
     return availability
@@ -169,91 +181,48 @@ const AppointmentDatePicker: React.FC = () => {
 
   return (
     <>
-      <Header>
-        <button type="button" onClick={() => history.goBack()}>
-          <FiArrowLeft name="chevron-left" size={24} color="#999591" />
-        </button>
-        <HeaderTitle>Cabelereiros</HeaderTitle>
-
-        <UserAvatar><img
-            src={user.avatar_url}
-            alt={user.name}/> 
-        </UserAvatar>
-      </Header>
       <Container>
-        <ProvidersListContainer style={{ flex: 1, flexDirection: 'row' }}>
-          <ProvidersList
-            data={providers}
-            keyExtractor={(provider) => provider.id}
-            renderItem={({ item: provider }) => (
-              <ProviderContainer
-                selected={provider.id === selectedProvider}
-                onClick={() => handleSelectProvider(provider.id)}
-              >
-                <ProviderAvatar><img
-                    src={user.avatar_url}
-                    alt={user.name}/>
-                </ProviderAvatar>
-                <ProviderName selected={provider.id === selectedProvider}>
-                  {provider.name}
-                </ProviderName>
-              </ProviderContainer>
-            )}
-          />
-          <PrecedureList
-            data={procedure}
-            //keyExtractor={(provider) => provider.id}
-            renderItem={({ item: procedure }) => (
-              <ProviderContainer
-                selected={procedure}
-                onClick={() => (procedure)}
-              >
-                <ProviderName selected={procedure}>
-                  {procedure}
-                </ProviderName>
-              </ProviderContainer>
-            )}
-          />
-        </ProvidersListContainer>
-
-        <Calendar>
-          <Title>Escolha a data</Title>
-
-          <DatePicker
-            value={selectedDate}
-            onChange={(date: Date) => setSelectedDate(date)}
-            minDate={minimumDate}
-          />
-        </Calendar>
-
-        <Schedule>
-          <Title>Escolha o horário</Title>
-
-          <Section>
-            <SectionTitle>Manhã</SectionTitle>
-
-            <SectionContent>
-              {morningAvailability.map(({ hourFormatted, hour, available }) => (
-                <Hour
-                  available={available}
-                  selected={hour === selectedHour}
-                  onClick={() => setSelectedHour(hour)}
-                  key={hourFormatted}
+      <Menu/>
+      <Content>
+        <HeaderTitle>Cabelereiros</HeaderTitle>
+          <ProvidersListContainer style={{ flex: 1, flexDirection: 'row' }}>
+            <ProvidersList
+              data={providers}
+              keyExtractor={(provider) => provider.id}
+              renderItem={({ item: provider }) => (
+                <ProviderContainer
+                  selected={provider.id === selectedProvider}
+                  onClick={() => handleSelectProvider(provider.id)}
                 >
-                  <HourText selected={hour === selectedHour}>
-                    {hourFormatted}
-                  </HourText>
-                </Hour>
-              ))}
-            </SectionContent>
-          </Section>
+                  <ProviderAvatar><img
+                      src={provider.avatar_url}
+                      alt={provider.name}/>
+                  </ProviderAvatar>
+                  <ProviderName selected={provider.id === selectedProvider}>
+                    {provider.name}
+                  </ProviderName>
+                </ProviderContainer>
+              )}
+            />
+        </ProvidersListContainer>
+          <Calendar>
+            <Title>Escolha a data</Title>
 
-          <Section>
-            <SectionTitle>Tarde</SectionTitle>
+            <DatePicker
+              value={selectedDate}
+              onChange={(date: Date) => setSelectedDate(date)}
+              minDate={minimumDate}
+            />
+          </Calendar>
 
-            <SectionContent>
-              {afternoonAvailability.map(
-                ({ hourFormatted, hour, available }) => (
+          <Schedule>
+            <Title>Escolha o horário</Title>
+
+            <Section>
+              <SectionTitle>Manhã</SectionTitle>
+
+              <SectionContent>
+                {morningAvailability.map(({ hourFormatted, hour, available }) => (
                   <Hour
                     available={available}
                     selected={hour === selectedHour}
@@ -264,18 +233,48 @@ const AppointmentDatePicker: React.FC = () => {
                       {hourFormatted}
                     </HourText>
                   </Hour>
-                ),
-              )}
-            </SectionContent>
-          </Section>
-        </Schedule>
+                ))}
+              </SectionContent>
+            </Section>
 
-        <CreateAppointmentButton onClick={handleCreateAppointment}>
-          <CreateAppointmentButtonText>Agendar</CreateAppointmentButtonText>
-        </CreateAppointmentButton>
+            <Section>
+              <SectionTitle>Tarde</SectionTitle>
+
+              <SectionContent>
+                {afternoonAvailability.map(
+                  ({ hourFormatted, hour, available }) => (
+                    <Hour
+                      available={available}
+                      selected={hour === selectedHour}
+                      onClick={() => setSelectedHour(hour)}
+                      key={hourFormatted}
+                    >
+                      <HourText selected={hour === selectedHour}>
+                        {hourFormatted}
+                      </HourText>
+                    </Hour>
+                  ),
+                )}
+              </SectionContent>
+            </Section>
+          </Schedule>
+
+          <CreateAppointmentButton onClick={handleCreateAppointment}>
+            <CreateAppointmentButtonText>Agendar</CreateAppointmentButtonText>
+          </CreateAppointmentButton>
+        </Content>
       </Container>
     </>
   );
 };
 
 export default AppointmentDatePicker;
+
+/*<button type="button" onClick={() => history.goBack()}>
+          <FiArrowLeft name="chevron-left" size={24} color="#999591" />
+        </button>
+
+<UserAvatar><img
+            src={user.avatar_url}
+            alt={UserAvatar.name}/> 
+        </UserAvatar>*/

@@ -61,12 +61,6 @@ function RightNav(props: Props) {
                   RELATORIOS
             </button>
             </li>
-            <li>
-            <button className="button-menu" type="button" onClick={() => {
-                history.push(`/add`);}}>
-                  AGENDAMENTOS
-            </button>
-            </li>
         <li>
           <F.ButtonOff>
             <button type="button" onClick={signOut}>

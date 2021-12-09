@@ -39,13 +39,13 @@ const CadProcedure: React.FC = () => {
         await schema.validate(data, { abortEarly: false });
 
         await api.post('/procedure', data);
-
+        console.log(data);
         history.push('/procedures');
 
         addToast({
           type: 'success',
-          title: 'Procedimento cadastrado.',
-          description: 'BeautyScheduler!',
+          title: 'Cadastro realizado!',
+          description: 'Procedimento cadastrado com sucesso!',
         });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -74,13 +74,13 @@ const CadProcedure: React.FC = () => {
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Cadastro de Procedimentos</h1>
 
-            <Input name="nome" icon={FiType} placeholder="Nome Completo" />
-            <Input name="price" icon={FiDollarSign} placeholder="Price" />
+            <Input name="name" icon={FiType} placeholder="Nome" />
+            <Input name="price" icon={FiDollarSign} placeholder="Valor" />
 
-            <Button type="submit">Salvar</Button>
+            <Button type="submit">Cadastrar<Link to="/procedures"></Link></Button>
           </Form>
 
-          <Link to="/colaboradores">
+          <Link to="/procedures">
             <FiX />
             Cancelar
           </Link>

@@ -14,7 +14,6 @@ import Relatorios from '../pages/Dashboard2';
 import Dash from '../pages/Dashboard3';
 import Procedure from '../pages/Procedures';
 import AgendaColab from '../pages/AgendaColab';
-import AddAppoinment from '../pages/AddAppointment';
 import CadProcedure from '../pages/CadProcedure';
 import AppointmentDatePicker from '../pages/AppointmentDatePicker';
 
@@ -27,7 +26,6 @@ const Routes: React.FC = () => (
     <Route path="/forgot-password" component={ForgotPassword} />
     <Route path="/reset-password" component={ResetPassword} />
     <Route path="/cad-estab" component={CadEstab} isPrivate/>
-
     <Route path="/colaboradores" component={Colaboradores} isPrivate />
     <Route path="/addappointment/:cooperatorId" component={AppointmentDatePicker} isPrivate />
     <Route path="/cadcolaborador" component={CadColab}isPrivate/>
@@ -38,7 +36,6 @@ const Routes: React.FC = () => (
     <Route path="/dashboard" component={Dash} isPrivate />
     <Route path="/profile" component={Profile} isPrivate />
     <Route path="/:cooperatorId" component={AgendaColab} isPrivate />
-    <Route path="/add" component={AddAppoinment} isPrivate />
   </Switch>
 );
 

@@ -4,7 +4,7 @@ import { shade } from 'polished';
 export const Container = styled.div``;
 
 export const Content = styled.div`
-margin-top: 150px;
+margin-top: 50px;
 .wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(12rem, 16rem));
@@ -27,6 +27,7 @@ display: flex;
     flex-direction: column;
 
     h1 {
+      align-items: center;
       margin-bottom: 24px;
       font-size: 20px;
       text-align: left;
@@ -84,7 +85,7 @@ export const Section = styled.section`
 
 export const AvatarInput = styled.div`
   position: relative;
-
+  margin-top: 100px;
   margin-bottom: 32px;
   align-self: center;
 
